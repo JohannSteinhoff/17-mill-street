@@ -34,8 +34,10 @@
     .photo { position: relative; min-height: 0; background: #eee; }
     .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .price { display: flex; flex-direction: column; border-top: 1px solid var(--rule); padding-top: 8px; }
-    .price .was { font-size: 11pt; color: var(--gray); }
-    .price .was s { font-weight: 700; }
+    .price .was { font-weight: 800; font-stretch: 70%; font-size: 40pt; line-height: 1; color: #8a8a8a; }
+    .price .was s { text-decoration: none; position: relative; }
+    .price .was s::after { content: ""; position: absolute; left: -3%; right: -3%; top: 52%; height: 5px; background: var(--ink); transform: rotate(-7deg); }
+    .price .save { display: inline-block; align-self: flex-start; margin-top: 6px; background: var(--red); color: #fff; font-size: 9.5pt; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 3px 7px; }
     .price .now { font-weight: 900; font-stretch: 70%; font-size: 74pt; line-height: .85; color: var(--red); margin: 2px 0 4px; }
     .price .now small { font-size: 20pt; font-weight: 700; }
     .price .per { font-size: 10.5pt; font-weight: 600; }
@@ -118,9 +120,10 @@
       <section class="feature">
         <div class="photo">${cover ? `<img src="${esc(cover.src)}" alt="">` : ""}</div>
         <div class="price">
-          ${L.rent_original ? `<div class="was">was <s>${esc(clean(L.rent_original))}</s></div>` : ""}
+          ${L.rent_original ? `<div class="was"><s>${esc(wasPrice(L))}</s></div>` : ""}
           <div class="now">${esc(clean(L.rent).replace(/\/mo.*$/, ""))}<small>/mo</small></div>
           <div class="per">for the whole apartment</div>
+          ${L.rent_original ? `<div class="save">Discounted · save ${esc(savings(L))}/mo</div>` : ""}
           <dl class="dates">
             <dt>Move in</dt><dd>${esc(short(L.available))}</dd>
             <dt>Lease ends</dt><dd>${esc(short(L.lease_ends))}</dd>

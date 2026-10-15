@@ -129,4 +129,4 @@ footer a { color: var(--muted); }
 .fact.hl .k, .fact.hl .v, .fact.hl .v span { color: #fff; }
 
 /* Discounted price */
-.price .was { font-size: 1.1rem; color: var(--muted); font-weight: 500; margin-right: 4px; }
+.price .was { font-size: 1.5rem; color: var(--muted); font-weight: 600; margin-right: 6px; text-decoration-color: #c0392b; text-decoration-thickness: 3px; }

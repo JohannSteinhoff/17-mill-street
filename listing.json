@@ -23,7 +23,7 @@
   },
 
   "rent": "$900/mo",
-  "rent_original": "$1,100/mo",
+  "rent_original": "$1,119/mo",
   "available": "December 1, 2026",
   "lease_ends": "July 23, 2027",
   "bedrooms": "1",
@@ -41,7 +41,7 @@
   ],
 
   "costs": [
-    { "label": "Monthly rent", "value": "$900 (discounted from $1,100)" },
+    { "label": "Monthly rent", "value": "$900 (discounted from $1,119)" },
     { "label": "Security deposit", "value": "None" },
     { "label": "Application / relet fees", "value": "None" },
     { "label": "Utilities (paid by you)", "value": "Water, electricity, sewer & valet trash" }

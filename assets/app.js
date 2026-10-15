@@ -35,6 +35,8 @@ function floorPlan(L) {
 
 // " (discounted from $1,100/mo)" when an original price is set.
 const discount = (L) => (L.rent_original ? ` (discounted from ${clean(L.rent_original)})` : "");
+const dollars = (s) => Number(clean(s).replace(/[^\d.]/g, "").replace(/\.$/, ""));
+const savings = (L) => "$" + (dollars(wasPrice(L)) - dollars(clean(L.rent).replace(/\/mo.*$/, ""))).toLocaleString();
 const wasPrice = (L) => clean(L.rent_original || "").replace(/\/mo.*$/, "");
 
 function telHref(phone) { return "tel:" + clean(phone).replace(/[^\d+]/g, ""); }
