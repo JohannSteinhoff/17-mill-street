@@ -30,23 +30,6 @@
   </div>
 
   <div class="sticky" id="sticky"></div>
-  <div class="linktree" id="linktree" role="dialog" aria-label="Quick links">
-    <nav class="linktree-panel">
-      <div class="linktree-head"><strong>Quick links</strong><span>closes in 5s</span></div>
-      <div class="linktree-links">
-        <a href="kit.html">🧰 Marketing kit</a>
-        <a href="flyer.html">🖨️ Printable flyer</a>
-        <a href="kit.html#flyers">🖼️ Social images</a>
-        <a href="kit.html#posts">📝 Post text</a>
-        <a href="kit.html#qr">🔳 QR code</a>
-        <a href="kit.html#ai">🤖 AI brief</a>
-        <a href="https://github.com/JohannSteinhoff/17-mill-street/edit/main/listing.json" target="_blank" rel="noopener">✏️ Edit listing</a>
-        <a href="https://github.com/JohannSteinhoff/17-mill-street" target="_blank" rel="noopener">📁 GitHub repo</a>
-        <a href="listing.json">🗂️ listing.json</a>
-      </div>
-      <div class="linktree-bar"></div>
-    </nav>
-  </div>
   <div class="lightbox" id="lightbox"><figure><img alt=""><p></p></figure></div>
   <div class="toast" id="toast"></div>
 
@@ -132,7 +115,7 @@
           <ul class="check">${list(L.neighborhood)}</ul>
         </div>
         <div class="card">
-          <h2 id="secret" class="secret">Questions</h2>
+          <h2>Questions</h2>
           ${(L.faq || []).map((f) => `<details><summary>${esc(clean(f.q))}</summary><p>${esc(clean(f.a))}</p></details>`).join("")}
         </div>
       </section>
@@ -156,7 +139,7 @@
       <button class="btn" id="share2">🔗 Share</button>`;
 
     $("#footer").innerHTML = `${esc(clean(L.listing_type))} · ${esc(fullAddress(L))}<br>
-      <a href="listing.json">Listing data (JSON)</a> · <a href="llms.txt">For AI assistants</a>`;
+      <a href="listing.json">Listing data (JSON)</a> · <a href="llms.txt">For AI assistants</a> · <a href="kit.html">Marketing kit</a>`;
 
     renderQR($("#qr"), url, 280);
 
@@ -176,22 +159,6 @@
       lb.classList.add("open");
     });
     lb.onclick = () => lb.classList.remove("open");
-
-    // Hidden link tree: tap "Questions" 5 times within 3s; it stays open for 5s.
-    const tree = $("#linktree");
-    let taps = [], hideTimer;
-    $("#secret").addEventListener("click", () => {
-      const now = Date.now();
-      taps = taps.filter((t) => now - t < 3000).concat(now);
-      if (taps.length < 5) return;
-      taps = [];
-      tree.classList.remove("open");
-      void tree.offsetWidth; // restart the countdown bar animation
-      tree.classList.add("open");
-      clearTimeout(hideTimer);
-      hideTimer = setTimeout(() => tree.classList.remove("open"), 5000);
-    });
-    tree.onclick = (e) => { if (e.target === tree) tree.classList.remove("open"); };
 
     // Structured data for search engines & AI crawlers that run JavaScript.
     const ld = document.createElement("script");
