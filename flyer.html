@@ -22,12 +22,9 @@
 
     /* The page: fixed rows that always add up to exactly 11in */
     .page { width: 8.5in; height: 11in; margin: 0 auto; background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,.2); overflow: hidden;
-            display: grid; grid-template-rows: 3.75in 3.75in 1.4in 2.1in; }
-    .page.no-strip { grid-template-rows: 4.4in 4.5in 0 2.1in; }
-    .page.no-tabs { grid-template-rows: 4.7in 4.1in 2.2in 0; }
-    .page.no-tabs.no-strip { grid-template-rows: 5.4in 5.6in 0 0; }
+            display: grid; grid-template-rows: 4.5in 4in 2.05in .45in; }
+    .page.no-strip { grid-template-rows: 5.5in 5.05in 0 .45in; }
     .page > * { overflow: hidden; min-height: 0; }
-    .page > .tabs { overflow: visible; }
 
     /* Hero */
     .hero { position: relative; background: linear-gradient(135deg, #cfe3d6, #f6e1bd); color: #fff; }
@@ -39,18 +36,18 @@
     .price-tag b { display: block; font: 800 28pt/1 Fraunces, Georgia, serif; }
     .price-tag span { font-size: 9pt; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
     .hero-text { left: .45in; right: .45in; bottom: .3in; }
-    .hero-text h1 { font: 800 33pt/1.03 Fraunces, Georgia, serif; margin: 0 0 8px; text-shadow: 0 2px 12px rgba(0,0,0,.3); }
+    .hero-text h1 { font: 800 38pt/1.03 Fraunces, Georgia, serif; margin: 0 0 8px; text-shadow: 0 2px 12px rgba(0,0,0,.3); }
     .hero-text p { margin: 0; font-size: 12.5pt; font-weight: 600; opacity: .95; }
 
     /* Info */
-    .info { display: grid; grid-template-columns: 1fr 2.45in; gap: .3in; padding: .3in .45in .25in; }
+    .info { display: grid; grid-template-columns: 1fr 2.6in; gap: .3in; padding: .35in .45in .25in; }
     .stats { display: grid; grid-template-columns: repeat(4, auto); border: 1.5px solid var(--line); border-radius: 12px; margin-bottom: .2in; }
     .stat { padding: 8px 10px; border-left: 1.5px solid var(--line); }
     .stat:first-child { border-left: 0; }
     .stat small { display: block; font-size: 7.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
     .stat b { font-size: 11.5pt; white-space: nowrap; }
     h2 { font: 700 13pt Fraunces, Georgia, serif; margin: 0 0 8px; color: var(--green); }
-    .checks { list-style: none; margin: 0 0 .17in; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; font-size: 10.5pt; line-height: 1.3; }
+    .checks { list-style: none; margin: 0 0 .22in; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size: 11.5pt; line-height: 1.3; }
     .checks li { display: flex; gap: 7px; }
     .checks li::before { content: "✓"; flex: none; width: 17px; height: 17px; border-radius: 50%; background: var(--soft); color: var(--green-2); font-weight: 800; font-size: 9pt; display: grid; place-items: center; }
     .chips { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -59,27 +56,21 @@
     .qr-card { background: var(--green); color: #fff; border-radius: 16px; padding: .17in .18in; text-align: center; display: flex; flex-direction: column; align-items: center; }
     .qr-card .scan { font-weight: 800; letter-spacing: .14em; font-size: 10pt; color: #f6d9a8; }
     .qr-card .qr { background: #fff; padding: 8px; border-radius: 10px; margin: 8px 0; }
-    .qr-card .qr img, .qr-card .qr canvas { width: 1.45in !important; height: 1.45in !important; display: block; }
+    .qr-card .qr img, .qr-card .qr canvas { width: 1.75in !important; height: 1.75in !important; display: block; }
     .qr-card p { margin: 0; font-size: 9pt; line-height: 1.35; opacity: .9; }
     .qr-card .call { margin-top: auto; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.25); width: 100%; }
     .qr-card .call b { display: block; font-size: 14pt; color: #fff; opacity: 1; }
 
     /* Photo strip */
-    .strip { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 6px; padding: 0 .45in .2in; }
+    .strip { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; padding: 0 .45in .25in; }
     .strip figure { margin: 0; position: relative; border-radius: 10px; overflow: hidden; background: #fff; border: 1px solid var(--line); }
     .strip img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .strip img.contain { object-fit: contain; padding: 4px; }
     .strip figcaption { position: absolute; left: 6px; bottom: 6px; background: rgba(23, 37, 31, .82); color: #fff; font-size: 7.5pt; font-weight: 600; padding: 2px 7px; border-radius: 99px; }
 
-    /* Tear-off tabs */
-    .tabs { position: relative; display: grid; grid-template-columns: repeat(8, 1fr); border-top: 2px dashed #9a9a9a; background: var(--cream); }
-    .tabs .cut { position: absolute; top: -10px; border-radius: 99px; left: 50%; transform: translateX(-50%); background: #fff; padding: 0 10px; font-size: 8.5pt; font-weight: 700; color: var(--muted); line-height: 18px; z-index: 1; }
-    .tab { position: relative; border-left: 1.5px dashed #b5b5b5; }
-    .tab:first-child { border-left: 0; }
-    .tab .t { position: absolute; left: 50%; top: 50%; width: 1.85in; transform: translate(-50%, -50%) rotate(-90deg); text-align: center; line-height: 1.3; font-size: 8pt; }
-    .tab .t b { display: block; font-size: 9.5pt; color: var(--green); }
-    .tab .t .ph { display: block; font-size: 10pt; font-weight: 800; }
-    .tab .t .u { display: block; font-size: 6.5pt; color: var(--muted); }
+
+    .foot { background: var(--green); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 .45in; font-size: 10pt; font-weight: 600; }
+    .foot b { color: #f6d9a8; }
 
     @media print {
       html, body { background: #fff; width: 8.5in; height: 11in; }
@@ -94,7 +85,6 @@
   <div class="toolbar">
     <button class="primary" onclick="print()">🖨️ Print / Save as PDF</button>
     <button id="png">⬇️ Download as image</button>
-    <label><input type="checkbox" id="tearoffs" checked> Tear-off tabs</label>
     <label><input type="checkbox" id="strip" checked> Photo strip</label>
     <a href="kit.html">← Marketing kit</a>
     <div class="hint">When printing: Paper size Letter · Margins None · Scale 100% · turn on Background graphics</div>
@@ -108,19 +98,12 @@
   (async () => {
     const L = await loadListing();
     const url = siteUrl(L);
-    const [host, ...rest] = url.replace(/^https?:\/\//, "").replace(/\/$/, "").split("/");
     const photos = L.photos || [];
     const cover = photos[0];
     const strip = photos.slice(1, 4);
     const a = L.address;
     const amenities = (L.amenities || []).slice(0, 4);
 
-    const tab = `<div class="tab"><div class="t">
-      <b>${esc(clean(L.bedrooms))}BR · ${esc(clean(L.rent))}</b>
-      ${esc(clean(a.street))}, ${esc(clean(a.city))}
-      <span class="ph">${esc(clean(L.contact.phone))}</span>
-      <span class="u">${esc(host)}${rest.length ? "/" + esc(rest.join("/")) : ""}</span>
-    </div></div>`;
 
     $("#page").innerHTML = `
       <section class="hero">
@@ -155,13 +138,12 @@
 
       <section class="strip">${strip.map((p) => `<figure><img src="${esc(p.src)}" alt=""${p.fit === "contain" ? ' class="contain"' : ""}>${p.caption ? `<figcaption>${esc(p.caption)}</figcaption>` : ""}</figure>`).join("")}</section>
 
-      <section class="tabs" id="tabs"><span class="cut">✂ Take one!</span>${tab.repeat(8)}</section>`;
+      <footer class="foot"><span>🔗 ${esc(url.replace(/^https?:\/\//, "").replace(/\/$/, ""))}</span><span>Text ${esc(clean(L.contact.name))} · <b>${esc(clean(L.contact.phone))}</b></span></footer>`;
 
     renderQR($("#qr"), url, 400);
 
     const page = $("#page");
     if (!strip.length) { page.classList.add("no-strip"); $("#strip").checked = false; $("#strip").disabled = true; }
-    $("#tearoffs").onchange = (e) => page.classList.toggle("no-tabs", !e.target.checked);
     $("#strip").onchange = (e) => page.classList.toggle("no-strip", !e.target.checked);
     $("#png").onclick = () => exportPng(page, "17-mill-street-flyer.png", 3);
   })();

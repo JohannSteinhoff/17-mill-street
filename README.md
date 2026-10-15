@@ -8,7 +8,7 @@ A small static site for finding someone to take over the lease. It's hosted free
 |---|---|---|
 | `index.html` | Renters (QR code lands here) | Photos, rent, dates, costs, FAQ, one-tap text/call/email |
 | `kit.html` | You | QR download, square + story images, copy-ready posts, AI brief, list of unfilled fields |
-| `flyer.html` | You | Letter-size flyer with QR + tear-off tabs → Print or Save as PDF |
+| `flyer.html` | You | Letter-size flyer with photos + QR code → Print or Save as PDF |
 | `listing.json` | You + AI | The single source of truth |
 | `llms.txt` | AI assistants | Tells AI tools where the data is and how to use it |
 
