@@ -128,7 +128,7 @@
             <div class="stat"><small>Lease ends</small><b>${esc(clean(L.lease_ends))}</b></div>
           </div>
           <h2>Why you'll love it</h2>
-          <ul class="checks">${(L.highlights || []).slice(0, 4).map((h) => `<li>${esc(clean(h))}</li>`).join("")}</ul>
+          <ul class="checks">${(L.highlights || []).slice(0, 5).map((h) => `<li>${esc(clean(h))}</li>`).join("")}</ul>
           ${amenities.length ? `<h2>Amenities</h2><div class="chips">${amenities.map((x) => `<span class="chip">${esc(clean(x))}</span>`).join("")}</div>` : ""}
           ${minis.length ? `<div class="minis">${minis.map((p) => `<figure><img src="${esc(p.src)}" alt="">${p.caption ? `<figcaption>${esc(p.caption)}</figcaption>` : ""}</figure>`).join("")}</div>` : ""}
         </div>

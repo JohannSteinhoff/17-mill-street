@@ -33,14 +33,15 @@
     "Fully furnished: just move in",
     "Spacious layout",
     "$1,000 is for the whole apartment, not per bed",
+    "No security deposit and no application fees",
     "Wi-Fi included",
     "[Responsive, friendly management]"
   ],
 
   "costs": [
     { "label": "Monthly rent", "value": "$1,000" },
-    { "label": "Security deposit", "value": "$1,000 (paid to landlord)" },
-    { "label": "Application / relet fee", "value": "$[50] application, $[0] relet fee" },
+    { "label": "Security deposit", "value": "None" },
+    { "label": "Application / relet fees", "value": "None" },
     { "label": "Utilities (paid by you)", "value": "Water, electricity, sewer & valet trash" }
   ],
 
