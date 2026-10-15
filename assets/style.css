@@ -109,3 +109,14 @@ footer a { color: var(--muted); }
   .sticky { display: flex; }
   h2 { font-size: 1.3rem; }
 }
+
+/* Floor plan section */
+.plan-block { display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; align-items: center; }
+.plan-block img { width: 100%; max-height: 520px; object-fit: contain; background: #fff; border-radius: 12px; cursor: zoom-in; }
+.lightbox img { background: #fff; }
+@media (max-width: 760px) { .plan-block { grid-template-columns: 1fr; } }
+
+/* Star feature callout */
+.star { display: flex; gap: 14px; align-items: center; background: #fdf1dc; border: 1.5px solid var(--warm); border-radius: var(--radius); padding: 16px 20px; margin: 0 0 16px; font-size: 1.1rem; font-weight: 600; }
+.star > span { font-size: 2rem; }
+.star small { display: block; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: #a8701c; font-weight: 700; }

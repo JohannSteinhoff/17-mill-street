@@ -43,6 +43,7 @@
     const smsBody = `Hi ${clean(c.name)}! I'm interested in the apartment at ${clean(L.address.street)}.`;
     const mail = `mailto:${clean(c.email)}?subject=${encodeURIComponent("Apartment at " + clean(L.address.street))}&body=${encodeURIComponent(smsBody)}`;
     const cover = (L.photos || [])[0];
+    const plan = floorPlan(L);
     const list = (arr) => (arr || []).map((x) => `<li>${esc(clean(x))}</li>`).join("");
     const rows = (arr) => (arr || []).map((x) => `<dt>${esc(clean(x.label))}</dt><dd>${esc(clean(x.value))}</dd>`).join("");
 
@@ -65,6 +66,8 @@
         </div>
       </section>
 
+      ${L.star_feature ? `<div class="star"><span>🧺</span><div><small>Best part</small>${esc(clean(L.star_feature))}</div></div>` : ""}
+
       <div class="facts">
         <div class="fact"><div class="k">Rent</div><div class="v">${esc(clean(L.rent))}</div></div>
         <div class="fact"><div class="k">Move in</div><div class="v">${esc(clean(L.available))}</div></div>
@@ -72,6 +75,17 @@
         <div class="fact"><div class="k">Size</div><div class="v">${esc(bedBath(L))}</div></div>
         <div class="fact"><div class="k">Location</div><div class="v">${esc(clean(L.address.neighborhood))}, ${esc(clean(L.address.city))}</div></div>
       </div>
+
+      ${plan ? `
+      <section class="block plan-block card">
+        <div class="plan-info">
+          <h2>Floor plan</h2>
+          <p class="lead" style="margin:0 0 14px">${esc(clean(L.bedrooms))} bed · ${esc(clean(L.bathrooms))} bath · ${esc(clean(L.sqft))} sq ft · ${esc(clean(L.furnished))}</p>
+          ${L.star_feature ? `<p style="margin:0 0 14px">🧺 The washer &amp; dryer are in the bedroom's walk-in closet (top left of the plan).</p>` : ""}
+          <button class="btn small" id="planOpen">🔍 View full size</button>
+        </div>
+        <img src="${esc(plan.src)}" alt="Floor plan" id="planImg">
+      </section>` : ""}
 
       ${(L.photos || []).length > 1 ? `
       <section class="block">
@@ -159,6 +173,11 @@
       lb.classList.add("open");
     });
     lb.onclick = () => lb.classList.remove("open");
+    if (plan) $("#planOpen").onclick = $("#planImg").onclick = () => {
+      $("img", lb).src = plan.src;
+      $("p", lb).textContent = plan.caption || "Floor plan";
+      lb.classList.add("open");
+    };
 
     // Structured data for search engines & AI crawlers that run JavaScript.
     const ld = document.createElement("script");

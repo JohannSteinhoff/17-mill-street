@@ -8,6 +8,9 @@
   "tagline": "[Private 1 bed / 1 bath at Copper Beech, minutes from Texas State, with a resort-style pool, 24-hour gym and study room. Take over my lease and move in as early as January.]",
   "listing_type": "Lease takeover (relet)",
 
+  "star_feature": "Washer & dryer built right into the bedroom closet. You don't even have to leave your closet to do laundry!",
+  "_star_feature_help": "Your #1 selling point. It gets a big callout on the website and flyer and leads every post.",
+
   "address": {
     "street": "17 Mill Street",
     "unit": "Apt 34107",
@@ -27,7 +30,7 @@
 
   "highlights": [
     "[Lots of natural light, big windows]",
-    "[In-unit washer & dryer]",
+    "Washer & dryer inside the bedroom closet",
     "[5-minute walk to grocery store and bus stop]",
     "[Responsive, friendly management]"
   ],
@@ -55,7 +58,7 @@
   "policies": [
     { "label": "Pets", "value": "[Cats OK, dogs under 40 lb, $300 deposit]" },
     { "label": "Parking", "value": "[1 assigned spot included]" },
-    { "label": "Laundry", "value": "[In unit]" },
+    { "label": "Laundry", "value": "Washer & dryer in the bedroom closet" },
     { "label": "Smoking", "value": "[Non-smoking building]" }
   ],
 
@@ -83,9 +86,9 @@
     { "src": "photos/01-bedroom.webp", "caption": "Bedroom" },
     { "src": "photos/02-pool-patio.webp", "caption": "Pool and patio" },
     { "src": "photos/03-fitness-center.webp", "caption": "24-hour fitness center" },
-    { "src": "photos/04-floorplan.webp", "caption": "Floor plan: 1 bed / 1 bath", "fit": "contain" }
+    { "src": "photos/04-floorplan.webp", "caption": "Floor plan: 1 bed / 1 bath", "fit": "contain", "floorplan": true }
   ],
-  "_photos_help": "Put images in the photos/ folder and list them like: { \"src\": \"photos/01-living-room.jpg\", \"caption\": \"Living room\" }. The first photo is the cover image. Add \"fit\": \"contain\" for floor plans so they aren't cropped.",
+  "_photos_help": "Put images in the photos/ folder and list them like: { \"src\": \"photos/01-living-room.jpg\", \"caption\": \"Living room\" }. The first photo is the cover image. Mark the floor plan with \"floorplan\": true (and \"fit\": \"contain\" so it isn't cropped); it gets its own big spot on the flyer and website.",
 
   "contact": {
     "name": "Johann",

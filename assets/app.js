@@ -27,6 +27,12 @@ function bedBath(L) {
   return clean(`${L.bedrooms} bd · ${L.bathrooms} ba · ${L.sqft} sq ft`);
 }
 
+// The photo marked "floorplan": true (falls back to one with "floor" in its name).
+function floorPlan(L) {
+  const photos = L.photos || [];
+  return photos.find((p) => p.floorplan) || photos.find((p) => /floor/i.test(`${p.src} ${p.caption}`));
+}
+
 function telHref(phone) { return "tel:" + clean(phone).replace(/[^\d+]/g, ""); }
 function smsHref(phone, body) { return "sms:" + clean(phone).replace(/[^\d+]/g, "") + "?&body=" + encodeURIComponent(body); }
 
@@ -54,7 +60,9 @@ const texts = {
 🛏 ${L.bedrooms} bed · 🛁 ${L.bathrooms} bath · ${L.sqft} sq ft
 📅 Available ${L.available} · lease runs through ${L.lease_ends}
 
-${L.tagline}
+${L.star_feature ? `🧺 ${L.star_feature}
+
+` : ""}${L.tagline}
 
 ✨ Highlights
 ${bullets(L.highlights)}
@@ -73,7 +81,7 @@ This is a ${L.listing_type.toLowerCase()}. You'd be approved by the landlord and
   },
 
   short(L) {
-    return clean(`🏡 ${L.bedrooms}BR/${L.bathrooms}BA at ${L.address.street}, ${L.address.city}: ${L.rent}. Available ${L.available} (lease takeover through ${L.lease_ends}). Photos & details: ${siteUrl(L)}`);
+    return clean(`🏡 ${L.bedrooms}BR/${L.bathrooms}BA at ${L.address.street}, ${L.address.city}: ${L.rent}. Available ${L.available} (lease takeover through ${L.lease_ends}).${L.star_feature ? " " + L.star_feature : ""} Photos & details: ${siteUrl(L)}`);
   },
 
   craigslist(L) {
@@ -81,7 +89,9 @@ This is a ${L.listing_type.toLowerCase()}. You'd be approved by the landlord and
 `${L.headline}
 
 ${L.tagline}
-
+${L.star_feature ? `
+★ ${L.star_feature}
+` : ""}
 THE BASICS
 - Address: ${fullAddress(L)}
 - Rent: ${L.rent}
@@ -136,6 +146,7 @@ Source of truth: ${siteUrl(L)}listing.json · Website: ${siteUrl(L)}
 - Size: ${bedBath(L)}, ${clean(L.furnished)}
 - Headline: ${clean(L.headline)}
 - Summary: ${clean(L.tagline)}
+- Standout feature: ${clean(L.star_feature)}
 
 ` +
       s("Highlights", bullets(L.highlights, "-")) +
