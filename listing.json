@@ -41,6 +41,20 @@
     "[Responsive, friendly management]"
   ],
 
+  "quick_facts": [
+    { "label": "Layout", "value": "1 bed / 1 bath · [650] sq ft" },
+    { "label": "Furniture", "value": "Fully furnished" },
+    { "label": "Campus", "value": "Route 22 bus · ~10 min" },
+    { "label": "Deposit", "value": "None" },
+    { "label": "Fees", "value": "None" },
+    { "label": "Wi-Fi", "value": "Included" },
+    { "label": "Utilities", "value": "Water, electric, sewer + trash (you pay)" },
+    { "label": "Pets", "value": "Up to 2" },
+    { "label": "Parking", "value": "Free on-site" },
+    { "label": "Amenities", "value": "Pool, hot tub, 24-hr gym, study room" }
+  ],
+  "_quick_facts_help": "Short one-liners for the website's Details grid. Keep each value brief.",
+
   "costs": [
     { "label": "Monthly rent", "value": "$900 (discounted from $1,119)" },
     { "label": "Security deposit", "value": "None" },

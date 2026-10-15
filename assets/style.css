@@ -143,3 +143,10 @@ footer { color: var(--muted); font-size: .8rem; padding: 22px 0 110px; border-to
   .sticky { display: flex; }
   .rent .actions { display: none; }
 }
+
+/* Compact details grid */
+.facts { margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); column-gap: 28px; }
+.facts div { border-top: 1px solid var(--hair); padding: 10px 0 12px; }
+.facts dt { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 2px 0 0; font-weight: 700; }
+@media (max-width: 760px) { .facts { grid-template-columns: 1fr 1fr; column-gap: 16px; } .facts dd { font-size: .92rem; } }

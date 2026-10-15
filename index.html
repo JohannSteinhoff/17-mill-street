@@ -117,9 +117,7 @@
           </div>
         </div>`) : ""}
 
-      ${section("Details", `
-        ${(L.highlights || []).length ? `<ul class="points">${L.highlights.map((h) => `<li>${esc(clean(h))}</li>`).join("")}</ul>` : ""}
-        <dl class="specs">${specs.map(([k, v]) => `<div><dt>${esc(clean(k))}</dt><dd>${esc(clean(v))}</dd></div>`).join("")}</dl>`)}
+      ${section("Details", `<dl class="facts">${(L.quick_facts || specs.map(([label, value]) => ({ label, value }))).map((f) => `<div><dt>${esc(clean(f.label))}</dt><dd>${esc(clean(f.value))}</dd></div>`).join("")}</dl>`)}
 
       ${gallery.length > 1 ? section("Photos", `
         <div class="gallery">${gallery.map((p, i) => `
