@@ -221,8 +221,11 @@ async function exportPng(node, filename, scale = 1) {
   await Promise.all($$("img", clone).map((img) => (img.complete ? 0 : new Promise((r) => (img.onload = img.onerror = r)))));
   if (document.fonts) await document.fonts.ready;
   try {
-    const canvas = await html2canvas(clone, { scale, useCORS: true, backgroundColor: null });
-    downloadDataUrl(canvas.toDataURL("image/png"), filename);
+    // html-to-image renders through the browser itself, so condensed (font-stretch) type comes out right.
+    const dataUrl = window.htmlToImage
+      ? await htmlToImage.toPng(clone, { pixelRatio: scale, backgroundColor: "#ffffff" })
+      : (await html2canvas(clone, { scale, useCORS: true, backgroundColor: null })).toDataURL("image/png");
+    downloadDataUrl(dataUrl, filename);
   } finally {
     stage.remove();
   }

@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Nanum+Pen+Script&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/style.css">
   <style>
     .kit-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 28px; }
@@ -26,35 +26,46 @@
     .qr-big img, .qr-big canvas { width: 180px; height: 180px; }
     .url { font: 13px ui-monospace, Consolas, monospace; word-break: break-all; color: var(--muted); }
 
-    /* Social graphics: built at real pixel size, shown scaled down */
-    .preview { overflow: hidden; border-radius: 12px; box-shadow: var(--shadow); }
+    /* Social graphics: built at real pixel size, shown scaled down. Same Swiss style as the flyer. */
+    .preview { overflow: hidden; border: 1px solid #111; }
     .preview > .social { transform-origin: top left; }
-    .social { width: 1080px; background: #2f6b4f; color: #fff; font-family: Inter, sans-serif; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+    .social { --red: #d7301f; width: 1080px; background: #fff; color: #111; font-family: Archivo, Arial, sans-serif; display: flex; flex-direction: column; overflow: hidden; padding: 64px; gap: 28px; }
     .social.sq { height: 1080px; }
-    .social.story { height: 1920px; }
-    .social .ph { background: linear-gradient(135deg, #cfe3d6, #f6e1bd); display: grid; place-items: center; color: #2f6b4f; font: 600 44px Fraunces, serif; }
-    .social .ph { flex: none; position: relative; overflow: hidden; }
-    .social.sq .ph { height: 470px; }
-    .social.story .ph { height: 1000px; }
+    .social.story { height: 1920px; padding: 72px 72px; gap: 32px; }
+    .social .top { display: flex; justify-content: space-between; font-size: 24px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border-bottom: 5px solid #111; padding-bottom: 12px; }
+    .social h4 { margin: 0; font-weight: 900; font-stretch: 72%; font-size: 98px; line-height: .9; letter-spacing: -.01em; }
+    .social h4 .light { display: block; font-weight: 400; }
+    .social.story h4 { font-size: 124px; }
+    .social .ph { position: relative; overflow: hidden; background: #eee; min-height: 0; }
     .social .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .social .ptag { position: absolute; top: 36px; right: 40px; background: #fff; color: #1f4d3a; border-radius: 22px; padding: 16px 26px 12px; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
-    .social .ptag b { display: block; font: 800 72px/1 Fraunces, serif; }
-    .social .ptag em { display: block; font-style: normal; font-size: 22px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #c0392b; margin-bottom: 4px; }
-    .social .ptag em s { color: #5c6b64; font-size: 44px; margin-right: 8px; text-decoration-color: #c0392b; text-decoration-thickness: 5px; }
-    .social .ptag span { font-size: 22px; font-weight: 700; color: #5c6b64; text-transform: uppercase; letter-spacing: .06em; }
-    .social .badge { position: absolute; top: 40px; left: 40px; background: #e8a33d; color: #1d2b25; font-weight: 800; font-size: 30px; padding: 14px 26px; border-radius: 99px; letter-spacing: .04em; text-transform: uppercase; }
-    .social .txt { flex: 1; padding: 44px 56px; display: flex; flex-direction: column; }
-    .social h4 { font: 800 64px/1.05 Fraunces, serif; margin: 0 0 18px; }
-    .social.story h4 { font-size: 84px; }
-    .social .price { font: 800 76px Fraunces, serif; color: #f6d9a8; line-height: 1; }
-    .social.story .price { font-size: 104px; margin: 20px 0; }
-    .social .meta { font-size: 32px; font-weight: 600; opacity: .92; margin-top: 14px; }
-    .social.story .meta { font-size: 42px; line-height: 1.5; }
-    .social .foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 28px; font-weight: 600; }
-    .social .foot .q { background: #fff; padding: 12px; border-radius: 14px; }
-    .social .foot .q img, .social .foot .q canvas { width: 170px; height: 170px; }
-    .social.story .foot .q img, .social.story .foot .q canvas { width: 260px; height: 260px; }
-    .social.story .foot { font-size: 40px; }
+    .social .row { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 380px; gap: 32px; }
+    .social .price { display: flex; flex-direction: column; border-top: 2px solid #111; padding-top: 14px; }
+    .social .was { font-weight: 800; font-stretch: 70%; font-size: 72px; line-height: 1; color: #8a8a8a; align-self: flex-start; position: relative; }
+    .social .was::after { content: ""; position: absolute; left: -4%; right: -4%; top: 52%; height: 8px; background: #111; transform: rotate(-7deg); }
+    .social .now { font-weight: 900; font-stretch: 70%; font-size: 168px; line-height: .85; color: var(--red); margin: 6px 0; }
+    .social .now small { font-size: 44px; font-weight: 700; }
+    .social .per { font-size: 26px; font-weight: 600; }
+    .social .save { align-self: flex-start; margin-top: 12px; background: var(--red); color: #fff; font-size: 20px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 6px 12px; }
+    .social .snote { margin-top: auto; font-family: "Nanum Pen Script", cursive; color: var(--red); font-size: 50px; line-height: .85; transform: rotate(-4deg); }
+    .social .foot { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; border-top: 5px solid #111; padding-top: 22px; }
+    .social .foot .q img, .social .foot .q canvas { width: 150px; height: 150px; display: block; }
+    .social .foot small { display: block; font-size: 22px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .social .foot b { display: block; font-weight: 900; font-stretch: 75%; font-size: 76px; line-height: 1; margin-top: 4px; }
+    .social.story .ph { flex: none; height: 400px; }
+    .social.story .pr1 { display: flex; align-items: flex-end; gap: 28px; }
+    .social.story .pr2 { display: flex; align-items: center; gap: 20px; margin-top: 14px; }
+    .social.story .now { font-size: 230px; margin: 0; }
+    .social.story .was { font-size: 90px; margin-bottom: 40px; }
+    .social.story .per { font-size: 34px; }
+    .social.story .save { font-size: 26px; margin-top: 0; }
+    .social .sfacts { margin: 0; }
+    .social .sfacts div { display: grid; grid-template-columns: 260px 1fr; border-top: 2px solid #111; padding: 12px 0; font-size: 34px; }
+    .social .sfacts div:last-child { border-bottom: 2px solid #111; }
+    .social .sfacts dt { font-size: 24px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding-top: 8px; }
+    .social .sfacts dd { margin: 0; font-weight: 700; }
+    .social.story .foot { margin-top: auto; }
+    .social.story .foot .q img, .social.story .foot .q canvas { width: 190px; height: 190px; }
+    .social.story .foot b { font-size: 104px; }
   </style>
 </head>
 <body>
@@ -130,7 +141,7 @@
   <footer></footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
   <script src="assets/app.js"></script>
   <script>
   (async () => {
@@ -158,25 +169,42 @@
     $("#urlCopy").onclick = (e) => copyText(url, e.target);
 
     // Social graphics
-    const foot = (id) => `<div class="foot"><div>Scan for photos & details<br><span style="opacity:.8">or text ${esc(clean(L.contact.phone))}</span></div><div class="q" id="${id}"></div></div>`;
+    const [h1a, ...h1b] = clean(L.headline).split(/(?<=\.)\s+/);
+    const headline = `<h4>${esc(h1a).replace(/(\d+-\w+)/, '<span style="white-space:nowrap">$1</span>')}${h1b.length ? `<span class="light">${esc(h1b.join(" "))}</span>` : ""}</h4>`;
+    const top = `<div class="top"><span>For rent · ${esc(clean(L.address.city))}, ${esc(clean(L.address.state))}</span><span>${esc(clean(L.address.street))}</span></div>`;
+    const now = `<div class="now">${esc(clean(L.rent).replace(/\/mo.*$/, ""))}<small>/mo</small></div>`;
+    const was = L.rent_original ? `<div class="was">${esc(wasPrice(L))}</div>` : "";
+    const save = L.rent_original ? `<div class="save">Discounted · save ${esc(savings(L))}/mo</div>` : "";
+    const foot = (id) => `<div class="foot"><div class="q" id="${id}"></div><div><small>Scan for photos + floor plan — or text us</small><b>${esc(clean(L.contact.phone))}</b></div></div>`;
+    const short = (d) => clean(d).replace(/^(\w{3})\w*/, "$1");
+    const fact = (label) => ((L.quick_facts || []).find((f) => f.label === label) || {}).value;
+    const noFees = /^none$/i.test(clean(fact("Deposit"))) && /^none$/i.test(clean(fact("Fees")));
+
     $("#sq").innerHTML = `
-      <div class="ph">${photo}</div><div class="badge">${esc(clean(L.furnished))}</div>
-      <div class="ptag">${L.rent_original ? `<em><s>${esc(wasPrice(L))}</s> Discounted</em>` : ""}<b>${esc(clean(L.rent).replace(/\/mo.*$/, ""))}</b><span>/ month · whole apt</span></div>
-      <div class="txt">
-        <h4 style="font-size:50px;margin-bottom:6px">${esc(clean(L.headline))}</h4>
-        <div class="meta" style="margin-top:0">🚌 ${esc(clean(L.commute))}<br>${esc(clean(L.furnished))} · Available ${esc(clean(L.available))}</div>
-        ${foot("qrSq")}
-      </div>`;
+      ${top}
+      ${headline}
+      <div class="row">
+        <div class="ph">${photo}</div>
+        <div class="price">${was}${now}<div class="per">for the whole apartment</div>${save}
+          ${noFees ? `<div class="snote">no deposit, no fees!</div>` : ""}
+        </div>
+      </div>
+      ${foot("qrSq")}`;
+
     $("#story").innerHTML = `
-      <div class="ph">${photo}</div><div class="badge">${esc(clean(L.furnished))}</div>
-      <div class="txt">
-        <h4>${esc(clean(L.headline))}</h4>
-        <div class="price">${L.rent_original ? `<s style="font-size:.5em;opacity:.7">${esc(clean(L.rent_original))}</s> ` : ""}${esc(clean(L.rent))}</div>
-        <div class="meta">🛏 ${esc(bedBath(L))} · ${esc(clean(L.furnished))}<br>🚌 ${esc(clean(L.commute))}<br>📅 Available ${esc(clean(L.available))}<br>📍 ${esc(clean(L.address.street))}, ${esc(clean(L.address.city))}</div>
-        ${foot("qrStory")}
-      </div>`;
-    renderQR($("#qrSq"), url, 340);
-    renderQR($("#qrStory"), url, 520);
+      ${top}
+      ${headline}
+      <div class="ph">${photo}</div>
+      <div class="pricebar"><div class="pr1">${was}${now}</div><div class="pr2"><span class="per">for the whole apartment</span>${save}</div></div>
+      <dl class="sfacts">
+        <div><dt>Move in</dt><dd>${esc(short(L.available))}</dd></div>
+        <div><dt>Campus</dt><dd>${esc(clean(fact("Campus") || L.commute))}</dd></div>
+        <div><dt>Furniture</dt><dd>${esc(clean(L.furnished))}</dd></div>
+        ${noFees ? `<div><dt>Deposit / fees</dt><dd>None</dd></div>` : ""}
+      </dl>
+      ${foot("qrStory")}`;
+    renderQR($("#qrSq"), url, 300);
+    renderQR($("#qrStory"), url, 440);
 
     const fit = () => $$(".preview").forEach((p) => {
       const s = p.clientWidth / +p.dataset.w;
