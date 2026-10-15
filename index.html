@@ -4,20 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>1701 Mill Street Apartment</title>
-  <meta name="description" content="Fully furnished 1 bedroom apartment at 1701 Mill Street, San Marcos, near Texas State University. Photos, rent, dates, costs, FAQ and contact info.">
+  <meta name="description" content="Fully furnished 1 bedroom apartment at 1701 Mill Street, San Marcos, near Texas State University.">
   <link rel="alternate" type="application/json" href="listing.json" title="Full listing data (machine readable)">
   <link rel="alternate" type="text/plain" href="llms.txt" title="Guide for AI assistants">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d7301f'/><text x='50' y='72' font-size='64' font-family='Arial' font-weight='900' text-anchor='middle' fill='white'>1</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div class="wrap">
     <header class="topbar">
       <a class="brand" href="./" id="brand">1701 Mill Street</a>
-      <span class="pill">🛋️ Fully furnished</span>
+      <span class="pill" id="where">For rent</span>
     </header>
 
     <main id="app">
@@ -40,122 +40,124 @@
     const L = await loadListing();
     const url = siteUrl(L);
     const c = L.contact;
-    const smsBody = `Hi ${clean(c.name)}! I'm interested in the apartment at ${clean(L.address.street)}.`;
-    const mail = `mailto:${clean(c.email)}?subject=${encodeURIComponent("Apartment at " + clean(L.address.street))}&body=${encodeURIComponent(smsBody)}`;
-    const cover = (L.photos || [])[0];
+    const a = L.address;
+    const smsBody = `Hi ${clean(c.name)}! I'm interested in the apartment at ${clean(a.street)}.`;
+    const mail = `mailto:${clean(c.email)}?subject=${encodeURIComponent("Apartment at " + clean(a.street))}&body=${encodeURIComponent(smsBody)}`;
     const plan = floorPlan(L);
     const gallery = (L.photos || []).filter((p) => p !== plan); // floor plan has its own section
-    const list = (arr) => (arr || []).map((x) => `<li>${esc(clean(x))}</li>`).join("");
-    const rows = (arr) => (arr || []).map((x) => `<dt>${esc(clean(x.label))}</dt><dd>${esc(clean(x.value))}</dd>`).join("");
-
-    document.title = `${clean(L.address.street)} · ${clean(L.rent)} · 1 bedroom apartment`;
-
-    $("#app").innerHTML = `
-      <section class="hero">
-        <div class="hero-img">${cover
-          ? `<img src="${esc(cover.src)}" alt="${esc(cover.caption || "Apartment photo")}">`
-          : `<div class="no-photo">📸 Photos coming soon</div>`}</div>
-        <div>
-          <h1>${esc(clean(L.headline)).replace(/(\d+-\w+)/g, '<span style="white-space:nowrap">$1</span>')}</h1>
-          <p class="lead">${esc(clean(L.tagline))}</p>
-          ${L.commute ? `<p class="commute">🚌 ${esc(clean(L.commute))}<br><span>📍 ${esc(clean(L.address.street))}, ${esc(clean(L.address.city))} · ${esc(clean(L.address.neighborhood))}</span></p>` : ""}
-          <div class="price">${L.rent_original ? `<s class="was">${esc(clean(L.rent_original))}</s> ` : ""}${esc(clean(L.rent))} <small>Available ${esc(clean(L.available))}</small></div>
-          <div class="actions">
-            <a class="btn primary" href="${smsHref(c.phone, smsBody)}">💬 Text ${esc(clean(c.name))}</a>
-            <a class="btn" href="${mail}">✉️ Email</a>
-            <button class="btn" id="share">🔗 Share</button>
-          </div>
-        </div>
-      </section>
-
-      ${L.star_feature ? `<div class="star"><span>🧺</span><div><small>Best part</small>${esc(clean(L.star_feature))}</div></div>` : ""}
-
-      <div class="facts">
-        <div class="fact hl"><div class="k">Layout</div><div class="v">${esc(clean(L.bedrooms))} bed / ${esc(clean(L.bathrooms))} bath<br><span>No roommates</span></div></div>
-        <div class="fact"><div class="k">Rent</div><div class="v">${esc(clean(L.rent))}<br><span>${L.rent_original ? `<s>${esc(wasPrice(L))}</s> · ` : ""}whole apartment</span></div></div>
-        ${L.commute ? `<div class="fact"><div class="k">To campus</div><div class="v">~10 min<br><span>Route 22 bus</span></div></div>` : ""}
-        <div class="fact"><div class="k">Move in</div><div class="v">${esc(clean(L.available))}</div></div>
-        <div class="fact"><div class="k">Lease ends</div><div class="v">${esc(clean(L.lease_ends))}</div></div>
-        <div class="fact"><div class="k">Size</div><div class="v">${esc(clean(L.sqft))} sq ft<br><span>${esc(clean(L.furnished))}</span></div></div>
-      </div>
-
-      ${plan ? `
-      <section class="block plan-block card">
-        <div class="plan-info">
-          <h2>Floor plan</h2>
-          <p class="lead" style="margin:0 0 14px">${esc(clean(L.bedrooms))} bed · ${esc(clean(L.bathrooms))} bath · ${esc(clean(L.sqft))} sq ft · ${esc(clean(L.furnished))}</p>
-          <button class="btn small" id="planOpen">🔍 View full size</button>
-        </div>
-        <img src="${esc(plan.src)}" alt="Floor plan" id="planImg">
-      </section>` : ""}
-
-      ${gallery.length > 1 ? `
-      <section class="block">
-        <h2>Photos</h2>
-        <div class="gallery">${gallery.map((p, i) => `<button data-i="${i}" aria-label="Open photo: ${esc(p.caption || "")}"><img loading="lazy" src="${esc(p.src)}" alt="${esc(p.caption || "Apartment photo")}"${p.fit === "contain" ? ` style="object-fit:contain;background:#fff"` : ""}></button>`).join("")}</div>
-      </section>` : ""}
-
-      <section class="block grid2">
-        <div class="card">
-          <h2>Why you'll like it</h2>
-          <ul class="check">${list(L.highlights)}</ul>
-        </div>
-        <div class="card">
-          <h2>What it costs</h2>
-          <dl class="rows">${rows(L.costs)}</dl>
-          ${(L.included || []).length ? `<p style="margin:14px 0 0;color:var(--muted)"><strong style="color:var(--ink)">Included in rent:</strong> ${esc(L.included.map(clean).join(", "))}</p>` : ""}
-        </div>
-      </section>
-
-      <section class="block grid2">
-        <div class="card">
-          <h2>Amenities</h2>
-          <ul class="check">${list(L.amenities)}</ul>
-        </div>
-        <div class="card">
-          <h2>Good to know</h2>
-          <dl class="rows">${rows(L.policies)}<dt>Furnished</dt><dd>${esc(clean(L.furnished))}</dd></dl>
-        </div>
-      </section>
-
-      <section class="block">
-        <h2>How taking over the lease works</h2>
-        <div class="card"><ol class="steps">${list(L.how_it_works)}</ol></div>
-      </section>
-
-      <section class="block grid2">
-        <div class="card">
-          <h2>The neighborhood</h2>
-          <p style="margin-top:0;color:var(--muted)">📍 ${esc(fullAddress(L))}<br>
-          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress(L))}" target="_blank" rel="noopener">Open in Google Maps →</a></p>
-          <ul class="check">${list(L.neighborhood)}</ul>
-        </div>
-        <div class="card">
-          <h2>Questions</h2>
-          ${(L.faq || []).map((f) => `<details><summary>${esc(clean(f.q))}</summary><p>${esc(clean(f.a))}</p></details>`).join("")}
-        </div>
-      </section>
-
-      <section class="block card contact">
-        <div>
-          <h2>Interested? Let's talk.</h2>
-          <p>${esc(clean(c.preferred))}. ${esc(clean(c.hours))}.</p>
-          <div class="actions" style="margin:0">
-            <a class="btn primary" href="${smsHref(c.phone, smsBody)}">💬 Text ${esc(clean(c.phone))}</a>
-            <a class="btn" href="${telHref(c.phone)}">📞 Call</a>
-            <a class="btn" href="${mail}">✉️ ${esc(clean(c.email))}</a>
-          </div>
-        </div>
-        <div class="qr-box" id="qr" title="Scan to open this page on your phone"></div>
+    const cover = gallery[0];
+    const short = (d) => clean(d).replace(/^(\w{3})\w*/, "$1"); // "December 1, 2026" -> "Dec 1, 2026"
+    const pairs = (arr) => (arr || []).map((x) => [x.label, x.value]);
+    const [h1a, ...h1b] = clean(L.headline).split(/(?<=\.)\s+/);
+    let n = 0;
+    const section = (title, body) => `
+      <section class="section">
+        <div class="label"><b>${String(++n).padStart(2, "0")}</b>${title}</div>
+        <div>${body}</div>
       </section>`;
 
-    $("#sticky").innerHTML = `
-      <a class="btn primary" href="${smsHref(c.phone, smsBody)}">💬 Text</a>
-      <a class="btn" href="${telHref(c.phone)}">📞 Call</a>
-      <button class="btn" id="share2">🔗 Share</button>`;
+    const specs = [
+      ["Layout", `${clean(L.bedrooms)} bed / ${clean(L.bathrooms)} bath · ${clean(L.sqft)} sq ft`],
+      ["Furniture", L.furnished],
+      ["Campus", L.commute],
+      ...pairs(L.costs),
+      ["Included", (L.included || []).map(clean).join(", ")],
+      ...pairs(L.policies),
+      ["Amenities", (L.amenities || []).map(clean).join(", ")],
+    ].filter(([, v]) => v);
 
-    $("#footer").innerHTML = `${esc(clean(L.listing_type))} · ${esc(fullAddress(L))}<br>
-      <a href="listing.json">Listing data (JSON)</a> · <a href="llms.txt">For AI assistants</a> · <a href="kit.html">Marketing kit</a>`;
+    document.title = `${clean(a.street)} · ${clean(L.rent)} · 1 bedroom apartment`;
+    $("#where").textContent = `For rent · ${clean(a.city)}, ${clean(a.state)}`;
+
+    $("#app").innerHTML = `
+      <h1 class="headline">${esc(h1a).replace(/(\d+-\w+)/, '<span class="nowrap">$1</span>')}${h1b.length ? `<span class="light">${esc(h1b.join(" "))}</span>` : ""}</h1>
+      <p class="subline">
+        ${L.commute ? `<span>${esc(clean(L.commute))}</span>` : ""}
+        <span>${esc(clean(a.street))}, ${esc(clean(a.city))} · ${esc(clean(a.neighborhood))}</span>
+      </p>
+
+      <section class="hero">
+        <div class="hero-img">${cover ? `<img src="${esc(cover.src)}" alt="${esc(cover.caption || "Apartment photo")}">` : ""}</div>
+        <div class="rent">
+          ${L.rent_original ? `<div class="was"><s>${esc(wasPrice(L))}</s></div>` : ""}
+          <div class="now">${esc(clean(L.rent).replace(/\/mo.*$/, ""))}<small>/mo</small></div>
+          <div class="per">for the whole apartment</div>
+          ${L.rent_original ? `<div class="save">Discounted · save ${esc(savings(L))}/mo</div>` : ""}
+          <dl class="dates">
+            <dt>Move in</dt><dd>${esc(short(L.available))}</dd>
+            <dt>Lease ends</dt><dd>${esc(short(L.lease_ends))}</dd>
+          </dl>
+          <div class="actions">
+            <a class="btn primary" href="${smsHref(c.phone, smsBody)}">Text ${esc(clean(c.name))}</a>
+            <a class="btn" href="${mail}">Email</a>
+            <button class="btn" id="share">Share</button>
+          </div>
+        </div>
+      </section>
+
+      ${plan ? section("Floor plan", `
+        <div class="plan-wrap">
+          <div class="plan">
+            ${L.star_feature_short ? `<div class="note">${esc(clean(L.star_feature_short))}</div>` : ""}
+            <div class="box" id="planImg" title="View full size">
+              <img src="${esc(plan.src)}" alt="Floor plan">
+              ${L.star_feature_short ? `
+              <svg viewBox="0 0 100 135" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M 14 31 C 18 24, 36 22, 41 27 C 46 33, 40 41, 27 42 C 15 43, 10 38, 12 33 C 13 30, 17 28, 21 28"
+                      fill="none" stroke="#d7301f" stroke-width="1.2" stroke-linecap="round"/>
+                <path d="M 50 -2 C 50 9, 47 17, 41 23" fill="none" stroke="#d7301f" stroke-width="1" stroke-linecap="round"/>
+                <path d="M 41 23 L 41.5 17.5 M 41 23 L 46.5 21" fill="none" stroke="#d7301f" stroke-width="1" stroke-linecap="round"/>
+              </svg>` : ""}
+            </div>
+          </div>
+          <div class="plan-meta">
+            <h2>${esc(clean(L.bedrooms))} bed / ${esc(clean(L.bathrooms))} bath<br>${esc(clean(L.sqft))} sq ft</h2>
+            <p>${esc(clean(L.tagline))}</p>
+            <button class="btn small" id="planOpen">View full size</button>
+          </div>
+        </div>`) : ""}
+
+      ${section("Details", `
+        ${(L.highlights || []).length ? `<ul class="points">${L.highlights.map((h) => `<li>${esc(clean(h))}</li>`).join("")}</ul>` : ""}
+        <dl class="specs">${specs.map(([k, v]) => `<div><dt>${esc(clean(k))}</dt><dd>${esc(clean(v))}</dd></div>`).join("")}</dl>`)}
+
+      ${gallery.length > 1 ? section("Photos", `
+        <div class="gallery">${gallery.map((p, i) => `
+          <figure>
+            <button data-i="${i}" aria-label="Open photo: ${esc(p.caption || "")}"><img loading="lazy" src="${esc(p.src)}" alt="${esc(p.caption || "Apartment photo")}"></button>
+            <figcaption><b>${String(i + 1).padStart(2, "0")}</b>${esc(p.caption || "")}</figcaption>
+          </figure>`).join("")}</div>`) : ""}
+
+      ${section("How it works", `<ol class="steps">${(L.how_it_works || []).map((s) => `<li>${esc(clean(s))}</li>`).join("")}</ol>`)}
+
+      ${section("Location", `
+        <h2>${esc(fullAddress(L))}</h2>
+        <ul class="points">${(L.neighborhood || []).map((x) => `<li>${esc(clean(x))}</li>`).join("")}</ul>
+        <a class="btn small" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress(L))}" target="_blank" rel="noopener">Open in Google Maps</a>`)}
+
+      ${section("Questions", (L.faq || []).map((f) => `<details><summary>${esc(clean(f.q))}</summary><p>${esc(clean(f.a))}</p></details>`).join(""))}
+
+      ${section("Contact", `
+        <div class="contact-grid">
+          <div>
+            <p style="margin:0">${esc(clean(c.preferred))}. ${esc(clean(c.hours))}.</p>
+            <a class="phone" href="${smsHref(c.phone, smsBody)}">${esc(clean(c.phone))}</a>
+            <div class="actions">
+              <a class="btn primary" href="${smsHref(c.phone, smsBody)}">Text ${esc(clean(c.name))}</a>
+              <a class="btn" href="${telHref(c.phone)}">Call</a>
+              <a class="btn" href="${mail}">${esc(clean(c.email))}</a>
+            </div>
+          </div>
+          <div class="qr-box"><div id="qr"></div><p>Open this page on your phone</p></div>
+        </div>`)}`;
+
+    $("#sticky").innerHTML = `
+      <a class="btn primary" href="${smsHref(c.phone, smsBody)}">Text</a>
+      <a class="btn" href="${telHref(c.phone)}">Call</a>
+      <button class="btn" id="share2">Share</button>`;
+
+    $("#footer").innerHTML = `<span>${esc(fullAddress(L))}</span>
+      <span><a href="listing.json">Listing data (JSON)</a> · <a href="llms.txt">For AI assistants</a> · <a href="kit.html">Marketing kit</a></span>`;
 
     renderQR($("#qr"), url, 280);
 
@@ -168,18 +170,10 @@
     $("#share2").onclick = share;
 
     const lb = $("#lightbox");
-    $$(".gallery button").forEach((b) => b.onclick = () => {
-      const p = gallery[b.dataset.i];
-      $("img", lb).src = p.src;
-      $("p", lb).textContent = p.caption || "";
-      lb.classList.add("open");
-    });
+    const open = (p) => { $("img", lb).src = p.src; $("p", lb).textContent = p.caption || ""; lb.classList.add("open"); };
+    $$(".gallery button").forEach((b) => b.onclick = () => open(gallery[b.dataset.i]));
     lb.onclick = () => lb.classList.remove("open");
-    if (plan) $("#planOpen").onclick = $("#planImg").onclick = () => {
-      $("img", lb).src = plan.src;
-      $("p", lb).textContent = plan.caption || "Floor plan";
-      lb.classList.add("open");
-    };
+    if (plan) $("#planOpen").onclick = $("#planImg").onclick = () => open(plan);
 
     // Structured data for search engines & AI crawlers that run JavaScript.
     const ld = document.createElement("script");
@@ -188,7 +182,7 @@
       "@context": "https://schema.org", "@type": "Apartment", name: clean(L.headline), description: clean(L.tagline), url,
       numberOfRooms: clean(L.bedrooms), numberOfBathroomsTotal: clean(L.bathrooms),
       floorSize: { "@type": "QuantitativeValue", value: clean(L.sqft), unitCode: "FTK" },
-      address: { "@type": "PostalAddress", streetAddress: clean(L.address.street), addressLocality: clean(L.address.city), addressRegion: clean(L.address.state), postalCode: clean(L.address.zip) },
+      address: { "@type": "PostalAddress", streetAddress: clean(a.street), addressLocality: clean(a.city), addressRegion: clean(a.state), postalCode: clean(a.zip) },
       image: (L.photos || []).map((p) => url + p.src),
     });
     document.head.appendChild(ld);
