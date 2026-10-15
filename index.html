@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -35,7 +34,6 @@
   <div class="toast" id="toast"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="assets/app.js"></script>
   <script>
   (async () => {
@@ -51,6 +49,9 @@
     const short = (d) => clean(d).replace(/^(\w{3})\w*/, "$1"); // "December 1, 2026" -> "Dec 1, 2026"
     const pairs = (arr) => (arr || []).map((x) => [x.label, x.value]);
     const [h1a, ...h1b] = clean(L.headline).split(/(?<=\.)\s+/);
+    // Pin on Copper Beech, view centered between it and Texas State University so both show.
+    // Phones get one zoom level wider so campus doesn't fall off the edge.
+    const mapEmbed = `https://maps.google.com/maps?q=${encodeURIComponent("Copper Beech at San Marcos")}&ll=${innerWidth < 700 ? "29.8935,-97.9300&z=12" : "29.8928,-97.9341&z=14"}&output=embed`;
     let n = 0;
     const section = (title, body) => `
       <section class="section">
@@ -133,7 +134,8 @@
       ${section("Location", `
         <h2>${esc(fullAddress(L))}</h2>
         <ul class="points">${(L.neighborhood || []).map((x) => `<li>${esc(clean(x))}</li>`).join("")}</ul>
-        <div class="map" id="map" role="img" aria-label="Map showing the apartment and Texas State University"></div>
+        <div class="map"><iframe title="Map of ${esc(clean(a.street))}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="${mapEmbed}"></iframe></div>
         <a class="btn small" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress(L))}" target="_blank" rel="noopener">Open in Google Maps</a>`)}
 
       ${section("Questions", (L.faq || []).map((f) => `<details><summary>${esc(clean(f.q))}</summary><p>${esc(clean(f.a))}</p></details>`).join(""))}
@@ -161,25 +163,6 @@
       <span><a href="listing.json">Listing data (JSON)</a> · <a href="llms.txt">For AI assistants</a> · <a href="kit.html">Marketing kit</a></span>`;
 
     renderQR($("#qr"), url, 280);
-
-    // Minimal map: OpenStreetMap tiles shown in grayscale (see style.css), red pin for the apartment, black marker for campus, framed to fit both.
-    if (L.map && window.L && $("#map")) {
-      const { pin, landmark } = L.map;
-      const m = window.L.map("map", { zoomControl: false, scrollWheelZoom: false, dragging: !window.L.Browser.mobile, tap: false, attributionControl: true });
-      window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }).addTo(m);
-      m.attributionControl.setPrefix(false);
-      const mark = (p, cls, dir) => window.L.marker([p.lat, p.lng], { icon: window.L.divIcon({ className: "", html: `<span class="${cls}"></span>`, iconSize: [18, 18], iconAnchor: [9, 9] }), keyboard: false, interactive: false })
-        .bindTooltip(esc(p.label), { permanent: true, direction: dir, className: `map-label ${cls}-label`, offset: dir === "top" ? [0, -10] : [0, 10] })
-        .addTo(m);
-      mark(pin, "map-pin", "top");
-      if (landmark) mark(landmark, "map-landmark", "bottom");
-      const fit = () => m.fitBounds(window.L.latLngBounds([[pin.lat, pin.lng], ...(landmark ? [[landmark.lat, landmark.lng]] : [])]), { padding: innerWidth < 700 ? [100, 55] : [170, 90], maxZoom: 15 });
-      fit();
-      addEventListener("resize", fit);
-    }
 
     const toast = (msg) => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1800); };
     const share = async () => {

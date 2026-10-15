@@ -88,12 +88,6 @@
     "Once approved, you sign a lease with the landlord and move in on your start date."
   ],
 
-  "map": {
-    "pin": { "label": "Copper Beech", "lat": 29.900608, "lng": -97.9126895 },
-    "landmark": { "label": "Texas State University", "lat": 29.8886, "lng": -97.9395 }
-  },
-  "_map_help": "The website map pins the apartment complex and frames it together with the landmark.",
-
   "neighborhood": [
     "Minutes from the Texas State University campus and Bobcat Stadium"
   ],
