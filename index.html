@@ -49,6 +49,9 @@
     const short = (d) => clean(d).replace(/^(\w{3})\w*/, "$1"); // "December 1, 2026" -> "Dec 1, 2026"
     const pairs = (arr) => (arr || []).map((x) => [x.label, x.value]);
     const [h1a, ...h1b] = clean(L.headline).split(/(?<=\.)\s+/);
+    // Pin on Copper Beech, view centered between it and Texas State University so both show.
+    // Phones get one zoom level wider so campus doesn't fall off the edge.
+    const mapEmbed = `https://maps.google.com/maps?q=${encodeURIComponent("Copper Beech at San Marcos")}&ll=${innerWidth < 700 ? "29.8935,-97.9300&z=12" : "29.8928,-97.9341&z=14"}&output=embed`;
     let n = 0;
     const section = (title, body) => `
       <section class="section">
@@ -132,7 +135,7 @@
         <h2>${esc(fullAddress(L))}</h2>
         <ul class="points">${(L.neighborhood || []).map((x) => `<li>${esc(clean(x))}</li>`).join("")}</ul>
         <div class="map"><iframe title="Map of ${esc(clean(a.street))}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=${encodeURIComponent(`${clean(a.neighborhood).split(",")[0]} ${clean(a.city)}, ${fullAddress(L)}`)}&z=15&output=embed"></iframe></div>
+          src="${mapEmbed}"></iframe></div>
         <a class="btn small" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress(L))}" target="_blank" rel="noopener">Open in Google Maps</a>`)}
 
       ${section("Questions", (L.faq || []).map((f) => `<details><summary>${esc(clean(f.q))}</summary><p>${esc(clean(f.a))}</p></details>`).join(""))}
