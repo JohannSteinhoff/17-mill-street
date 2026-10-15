@@ -67,7 +67,7 @@
   ],
 
   "how_it_works": [
-    "Check out the photos and details here, then text or email me with any questions.",
+    "Check out the photos and details here, then text or email us with any questions.",
     "[Schedule a tour: in person or a live video walkthrough.]",
     "[Apply with the property manager (credit/background check, typically income about 3x rent).]",
     "[Once approved, you sign a lease with the landlord and move in on your start date.]"
@@ -78,9 +78,9 @@
   ],
 
   "faq": [
-    { "q": "What is a relet?", "a": "I'm moving out before my lease ends, so the landlord lets a new tenant take over the apartment. You get approved by the landlord and the rest of the lease becomes yours." },
+    { "q": "What is a relet?", "a": "We're moving out before our lease ends, so the landlord lets a new tenant take over the apartment. You get approved by the landlord and the rest of the lease becomes yours." },
     { "q": "Can the lease be extended past the end date?", "a": "[Usually yes. The landlord typically offers a renewal before the lease ends.]" },
-    { "q": "Can I see it before applying?", "a": "Absolutely. Text me to set up an in-person tour or a live video walkthrough." },
+    { "q": "Can I see it before applying?", "a": "Absolutely. Text us to set up an in-person tour or a live video walkthrough." },
     { "q": "Who do I pay rent to?", "a": "[Directly to the property manager through their online portal.]" }
   ],
 
@@ -93,7 +93,8 @@
   "_photos_help": "Put images in the photos/ folder and list them like: { \"src\": \"photos/01-living-room.jpg\", \"caption\": \"Living room\" }. The first photo is the cover image. Mark the floor plan with \"floorplan\": true (and \"fit\": \"contain\" so it isn't cropped); it gets its own big spot on the flyer and website.",
 
   "contact": {
-    "name": "Johann",
+    "name": "Cammie",
+    "_name_help": "Who answers texts/calls. Public buttons just say \"Text us\"; the name is only used to sign inquiry replies.",
     "phone": "[(555) 555-5555]",
     "email": "[you@example.com]",
     "preferred": "Text is fastest",

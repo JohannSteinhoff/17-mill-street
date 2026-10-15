@@ -41,7 +41,7 @@
     const url = siteUrl(L);
     const c = L.contact;
     const a = L.address;
-    const smsBody = `Hi ${clean(c.name)}! I'm interested in the apartment at ${clean(a.street)}.`;
+    const smsBody = `Hi! I'm interested in the apartment at ${clean(a.street)}.`;
     const mail = `mailto:${clean(c.email)}?subject=${encodeURIComponent("Apartment at " + clean(a.street))}&body=${encodeURIComponent(smsBody)}`;
     const plan = floorPlan(L);
     const gallery = (L.photos || []).filter((p) => p !== plan); // floor plan has its own section
@@ -88,7 +88,7 @@
             <dt>Lease ends</dt><dd>${esc(short(L.lease_ends))}</dd>
           </dl>
           <div class="actions">
-            <a class="btn primary" href="${smsHref(c.phone, smsBody)}">Text ${esc(clean(c.name))}</a>
+            <a class="btn primary" href="${smsHref(c.phone, smsBody)}">Text us</a>
             <a class="btn" href="${mail}">Email</a>
             <button class="btn" id="share">Share</button>
           </div>
@@ -143,7 +143,7 @@
             <p style="margin:0">${esc(clean(c.preferred))}. ${esc(clean(c.hours))}.</p>
             <a class="phone" href="${smsHref(c.phone, smsBody)}">${esc(clean(c.phone))}</a>
             <div class="actions">
-              <a class="btn primary" href="${smsHref(c.phone, smsBody)}">Text ${esc(clean(c.name))}</a>
+              <a class="btn primary" href="${smsHref(c.phone, smsBody)}">Text us</a>
               <a class="btn" href="${telHref(c.phone)}">Call</a>
               <a class="btn" href="${mail}">${esc(clean(c.email))}</a>
             </div>

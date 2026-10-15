@@ -85,7 +85,7 @@ ${pairs(L.policies)}
 
 📸 All photos, FAQ & details: ${siteUrl(L)}
 
-This is a ${L.listing_type.toLowerCase()}. You'd be approved by the landlord and take over the lease. Message me here or text ${L.contact.phone}!`);
+This is a ${L.listing_type.toLowerCase()}. You'd be approved by the landlord and take over the lease. Message us here or text ${L.contact.phone}!`);
   },
 
   short(L) {
@@ -124,7 +124,7 @@ HOW IT WORKS
 ${(L.how_it_works || []).map((s, i) => `${i + 1}. ${clean(s)}`).join("\n")}
 
 Photos, FAQ and everything else: ${siteUrl(L)}
-Contact ${L.contact.name}: ${L.contact.phone} / ${L.contact.email} (${L.contact.preferred})`);
+Text or call: ${L.contact.phone} / ${L.contact.email} (${L.contact.preferred})`);
   },
 
   reply(L) {
@@ -135,7 +135,7 @@ Quick rundown: it's your own ${L.bedrooms} bed / ${L.bathrooms} bath (no roommat
 
 Everything (photos, costs, FAQ) is here: ${siteUrl(L)}
 
-Would you like to set up a tour? I'm happy to do in person or a video walkthrough. When works for you?
+Would you like to set up a tour? We're happy to do in person or a video walkthrough. When works for you?
 
 - ${L.contact.name}`);
   },
@@ -170,7 +170,7 @@ Source of truth: ${siteUrl(L)}listing.json · Website: ${siteUrl(L)}
       s("Floor plan", floorPlan(L) ? `- ${siteUrl(L)}${floorPlan(L).src}` : "") +
       s("Photos", (L.photos || []).filter((p) => p !== floorPlan(L)).map((p) => `- ${siteUrl(L)}${p.src}${p.caption ? ` (${p.caption})` : ""}`).join("\n")) +
 `## Contact
-- ${clean(L.contact.name)}: ${clean(L.contact.phone)}, ${clean(L.contact.email)}
+- ${clean(L.contact.name)} answers texts and calls: ${clean(L.contact.phone)}, ${clean(L.contact.email)}
 - ${clean(L.contact.preferred)}. ${clean(L.contact.hours)}
 
 ## Instructions for AI
