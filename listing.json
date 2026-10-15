@@ -31,7 +31,9 @@
 
   "highlights": [
     "Fully furnished: just move in",
+    "Spacious layout",
     "$1,000 is for the whole apartment, not per bed",
+    "Wi-Fi included",
     "[Responsive, friendly management]"
   ],
 
@@ -39,12 +41,11 @@
     { "label": "Monthly rent", "value": "$1,000" },
     { "label": "Security deposit", "value": "$1,000 (paid to landlord)" },
     { "label": "Application / relet fee", "value": "$[50] application, $[0] relet fee" },
-    { "label": "Utilities (estimate)", "value": "~$[90]/mo electric + internet" }
+    { "label": "Utilities (paid by you)", "value": "Water, electricity, sewer & valet trash" }
   ],
 
   "included": [
-    "[Water, sewer & trash]",
-    "[One parking space]"
+    "Wi-Fi"
   ],
 
   "amenities": [
@@ -57,7 +58,7 @@
 
   "policies": [
     { "label": "Pets", "value": "[Cats OK, dogs under 40 lb, $300 deposit]" },
-    { "label": "Parking", "value": "[1 assigned spot included]" },
+    { "label": "Parking", "value": "Free on-site parking" },
     { "label": "Smoking", "value": "[Non-smoking building]" }
   ],
 
