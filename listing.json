@@ -21,7 +21,8 @@
     "neighborhood": "Copper Beech, near Texas State University"
   },
 
-  "rent": "$1,000/mo",
+  "rent": "$900/mo",
+  "rent_original": "$1,100/mo",
   "available": "December 1, 2026",
   "lease_ends": "July 23, 2027",
   "bedrooms": "1",
@@ -32,14 +33,14 @@
   "highlights": [
     "Fully furnished: just move in",
     "Spacious layout",
-    "$1,000 is for the whole apartment, not per bed",
+    "$900 is for the whole apartment, not per bed",
     "No security deposit and no application fees",
     "Wi-Fi included",
     "[Responsive, friendly management]"
   ],
 
   "costs": [
-    { "label": "Monthly rent", "value": "$1,000" },
+    { "label": "Monthly rent", "value": "$900 (discounted from $1,100)" },
     { "label": "Security deposit", "value": "None" },
     { "label": "Application / relet fees", "value": "None" },
     { "label": "Utilities (paid by you)", "value": "Water, electricity, sewer & valet trash" }

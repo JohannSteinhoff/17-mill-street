@@ -42,7 +42,7 @@ h2 { font-size: 1.5rem; }
 .hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); }
 .hero .lead { color: var(--muted); font-size: 1.08rem; margin: 0 0 20px; }
 .price { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: var(--accent); }
-.price small { font: 500 .95rem var(--sans); color: var(--muted); }
+.price small { display: block; font: 500 .95rem var(--sans); color: var(--muted); margin-top: 2px; }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 
 /* Facts */
@@ -127,3 +127,6 @@ footer a { color: var(--muted); }
 .fact .v span { font-size: .82rem; font-weight: 500; color: var(--muted); }
 .fact.hl { background: var(--accent); border-color: var(--accent); }
 .fact.hl .k, .fact.hl .v, .fact.hl .v span { color: #fff; }
+
+/* Discounted price */
+.price .was { font-size: 1.1rem; color: var(--muted); font-weight: 500; margin-right: 4px; }

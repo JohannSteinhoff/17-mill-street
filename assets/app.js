@@ -33,6 +33,10 @@ function floorPlan(L) {
   return photos.find((p) => p.floorplan) || photos.find((p) => /floor/i.test(`${p.src} ${p.caption}`));
 }
 
+// " (discounted from $1,100/mo)" when an original price is set.
+const discount = (L) => (L.rent_original ? ` (discounted from ${clean(L.rent_original)})` : "");
+const wasPrice = (L) => clean(L.rent_original || "").replace(/\/mo.*$/, "");
+
 function telHref(phone) { return "tel:" + clean(phone).replace(/[^\d+]/g, ""); }
 function smsHref(phone, body) { return "sms:" + clean(phone).replace(/[^\d+]/g, "") + "?&body=" + encodeURIComponent(body); }
 
@@ -54,7 +58,8 @@ const pairs = (arr, mark = "•") => (arr || []).map((x) => `${mark} ${clean(x.l
 const texts = {
   marketplace(L) {
     return clean(
-`${L.headline}: ${L.rent}
+`${L.headline}
+💵 ${L.rent}${discount(L)}
 
 📍 ${L.address.street}, ${L.address.city} (${L.address.neighborhood})
 🛏 ${L.bedrooms} bed · 🛁 ${L.bathrooms} bath · ${L.sqft} sq ft
@@ -82,7 +87,7 @@ This is a ${L.listing_type.toLowerCase()}. You'd be approved by the landlord and
   },
 
   short(L) {
-    return clean(`🏡 ${L.bedrooms}BR/${L.bathrooms}BA at ${L.address.street}, ${L.address.city}: ${L.rent}. Available ${L.available} (lease through ${L.lease_ends}). ${L.commute}.${L.star_feature ? " " + L.star_feature : ""} Photos & details: ${siteUrl(L)}`);
+    return clean(`🏡 ${L.bedrooms}BR/${L.bathrooms}BA at ${L.address.street}, ${L.address.city}: ${L.rent}${discount(L)}. Available ${L.available} (lease through ${L.lease_ends}). ${L.commute}.${L.star_feature ? " " + L.star_feature : ""} Photos & details: ${siteUrl(L)}`);
   },
 
   craigslist(L) {
@@ -95,7 +100,7 @@ ${L.star_feature ? `
 ` : ""}
 THE BASICS
 - Address: ${fullAddress(L)}
-- Rent: ${L.rent}
+- Rent: ${L.rent}${discount(L)}
 - Size: ${L.bedrooms} bed / ${L.bathrooms} bath / ${L.sqft} sq ft, ${L.furnished} (no roommates)
 - Commute: ${L.commute}
 - Available: ${L.available}
@@ -124,7 +129,7 @@ Contact ${L.contact.name}: ${L.contact.phone} / ${L.contact.email} (${L.contact.
     return clean(
 `Hi! Thanks for reaching out about ${L.address.street}. Yes, it's still available.
 
-Quick rundown: it's your own ${L.bedrooms} bed / ${L.bathrooms} bath (no roommates), ${L.furnished.toLowerCase()}, ${L.rent} for the whole place, ${L.commute.charAt(0).toLowerCase() + L.commute.slice(1)}, available ${L.available}, and the lease runs through ${L.lease_ends}. You'd apply with the property manager and take over the lease.
+Quick rundown: it's your own ${L.bedrooms} bed / ${L.bathrooms} bath (no roommates), ${L.furnished.toLowerCase()}, ${L.rent} for the whole place${discount(L)}, ${L.commute.charAt(0).toLowerCase() + L.commute.slice(1)}, available ${L.available}, and the lease runs through ${L.lease_ends}. You'd apply with the property manager and take over the lease.
 
 Everything (photos, costs, FAQ) is here: ${siteUrl(L)}
 
@@ -142,7 +147,7 @@ Source of truth: ${siteUrl(L)}listing.json · Website: ${siteUrl(L)}
 ## Key facts
 - Type: ${clean(L.listing_type)}
 - Address: ${fullAddress(L)} (${clean(L.address.neighborhood)})
-- Rent: ${clean(L.rent)}
+- Rent: ${clean(L.rent)}${discount(L)}
 - Available: ${clean(L.available)}
 - Lease ends: ${clean(L.lease_ends)}
 - Size: ${bedBath(L)}, ${clean(L.furnished)}, no roommates
