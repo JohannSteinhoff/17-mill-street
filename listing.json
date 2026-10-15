@@ -4,7 +4,7 @@
   "site_url": "https://johannsteinhoff.github.io/17-mill-street/",
 
   "title": "1701 Mill Street, Apt 34107",
-  "headline": "[Bright 1-bedroom], ready for you to take over",
+  "headline": "Fully furnished 1-bedroom, ready for you to take over",
   "tagline": "[Private 1 bed / 1 bath at Copper Beech, minutes from Texas State, with a resort-style pool, 24-hour gym and study room. Take over my lease and move in as early as January.]",
   "listing_type": "Lease takeover (relet)",
 
@@ -26,12 +26,11 @@
   "bedrooms": "1",
   "bathrooms": "1",
   "sqft": "[650]",
-  "furnished": "[Unfurnished]",
+  "furnished": "Fully furnished",
 
   "highlights": [
-    "[Lots of natural light, big windows]",
-    "Washer & dryer inside the bedroom closet",
-    "[5-minute walk to grocery store and bus stop]",
+    "Fully furnished: just move in",
+    "Your own place, no roommates",
     "[Responsive, friendly management]"
   ],
 
@@ -58,7 +57,6 @@
   "policies": [
     { "label": "Pets", "value": "[Cats OK, dogs under 40 lb, $300 deposit]" },
     { "label": "Parking", "value": "[1 assigned spot included]" },
-    { "label": "Laundry", "value": "Washer & dryer in the bedroom closet" },
     { "label": "Smoking", "value": "[Non-smoking building]" }
   ],
 
@@ -71,8 +69,7 @@
 
   "neighborhood": [
     "On the Texas State shuttle route",
-    "Minutes from the Texas State campus and Bobcat Stadium",
-    "[Grocery store: X min drive]"
+    "Minutes from the Texas State campus and Bobcat Stadium"
   ],
 
   "faq": [

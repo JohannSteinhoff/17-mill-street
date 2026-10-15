@@ -81,7 +81,6 @@
         <div class="plan-info">
           <h2>Floor plan</h2>
           <p class="lead" style="margin:0 0 14px">${esc(clean(L.bedrooms))} bed · ${esc(clean(L.bathrooms))} bath · ${esc(clean(L.sqft))} sq ft · ${esc(clean(L.furnished))}</p>
-          ${L.star_feature ? `<p style="margin:0 0 14px">🧺 The washer &amp; dryer are in the bedroom's walk-in closet (top left of the plan).</p>` : ""}
           <button class="btn small" id="planOpen">🔍 View full size</button>
         </div>
         <img src="${esc(plan.src)}" alt="Floor plan" id="planImg">
