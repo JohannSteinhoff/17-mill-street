@@ -82,7 +82,7 @@ This is a ${L.listing_type.toLowerCase()}. You'd be approved by the landlord and
   },
 
   short(L) {
-    return clean(`🏡 ${L.bedrooms}BR/${L.bathrooms}BA at ${L.address.street}, ${L.address.city}: ${L.rent}. Available ${L.available} (lease takeover through ${L.lease_ends}). ${L.commute}.${L.star_feature ? " " + L.star_feature : ""} Photos & details: ${siteUrl(L)}`);
+    return clean(`🏡 ${L.bedrooms}BR/${L.bathrooms}BA at ${L.address.street}, ${L.address.city}: ${L.rent}. Available ${L.available} (lease through ${L.lease_ends}). ${L.commute}.${L.star_feature ? " " + L.star_feature : ""} Photos & details: ${siteUrl(L)}`);
   },
 
   craigslist(L) {

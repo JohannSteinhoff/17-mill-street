@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>1701 Mill Street Apartment</title>
-  <meta name="description" content="Apartment available for lease takeover (relet) at 1701 Mill Street. Photos, rent, dates, costs, FAQ and contact info.">
+  <meta name="description" content="Fully furnished 1 bedroom apartment at 1701 Mill Street, San Marcos, near Texas State University. Photos, rent, dates, costs, FAQ and contact info.">
   <link rel="alternate" type="application/json" href="listing.json" title="Full listing data (machine readable)">
   <link rel="alternate" type="text/plain" href="llms.txt" title="Guide for AI assistants">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
@@ -17,7 +17,7 @@
   <div class="wrap">
     <header class="topbar">
       <a class="brand" href="./" id="brand">1701 Mill Street</a>
-      <span class="pill">🔑 Lease takeover</span>
+      <span class="pill">🛋️ Fully furnished</span>
     </header>
 
     <main id="app">
@@ -47,7 +47,7 @@
     const list = (arr) => (arr || []).map((x) => `<li>${esc(clean(x))}</li>`).join("");
     const rows = (arr) => (arr || []).map((x) => `<dt>${esc(clean(x.label))}</dt><dd>${esc(clean(x.value))}</dd>`).join("");
 
-    document.title = `${clean(L.address.street)} · ${clean(L.rent)} · Apartment for relet`;
+    document.title = `${clean(L.address.street)} · ${clean(L.rent)} · 1 bedroom apartment`;
 
     $("#app").innerHTML = `
       <section class="hero">

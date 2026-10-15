@@ -158,7 +158,7 @@
     // Social graphics
     const foot = (id) => `<div class="foot"><div>Scan for photos & details<br><span style="opacity:.8">or text ${esc(clean(L.contact.phone))}</span></div><div class="q" id="${id}"></div></div>`;
     $("#sq").innerHTML = `
-      <div class="ph">${photo}</div><div class="badge">Lease takeover</div>
+      <div class="ph">${photo}</div><div class="badge">${esc(clean(L.furnished))}</div>
       <div class="ptag"><b>${esc(clean(L.rent).replace(/\/mo.*$/, ""))}</b><span>/ month · whole apt</span></div>
       <div class="txt">
         <h4 style="font-size:50px;margin-bottom:6px">${esc(clean(L.headline))}</h4>
@@ -166,7 +166,7 @@
         ${foot("qrSq")}
       </div>`;
     $("#story").innerHTML = `
-      <div class="ph">${photo}</div><div class="badge">Lease takeover</div>
+      <div class="ph">${photo}</div><div class="badge">${esc(clean(L.furnished))}</div>
       <div class="txt">
         <h4>${esc(clean(L.headline))}</h4>
         <div class="price">${esc(clean(L.rent))}</div>

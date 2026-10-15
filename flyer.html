@@ -110,7 +110,7 @@
     $("#page").innerHTML = `
       <section class="hero">
         ${cover ? `<img src="${esc(cover.src)}" alt="">` : ""}
-        <div class="badge">Lease takeover</div>
+        <div class="badge">${esc(clean(L.furnished))}</div>
         <div class="price-tag"><b>${esc(clean(L.rent).replace(/\/mo.*$/, ""))}</b><span>/ month · whole apt</span></div>
         <div class="hero-text">
           <h1>${esc(clean(L.headline)).replace(/(\d+-\w+)/g, '<span style="white-space:nowrap">$1</span>')}</h1>
@@ -143,7 +143,7 @@
             <div class="qr" id="qr"></div>
             <div>
               <div class="scan">SCAN ME</div>
-              <p>All photos, costs, FAQ &amp; how the lease takeover works</p>
+              <p>All photos, costs, FAQ &amp; how to apply</p>
             </div>
           </div>
         </div>
