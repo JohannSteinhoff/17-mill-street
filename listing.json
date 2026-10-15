@@ -47,6 +47,7 @@
     { "label": "Campus", "value": "Route 22 bus · ~10 min" },
     { "label": "Deposit", "value": "None" },
     { "label": "Fees", "value": "None" },
+    { "label": "Credit check", "value": "None" },
     { "label": "Wi-Fi", "value": "Included" },
     { "label": "Utilities", "value": "Water, electric, sewer + trash (you pay)" },
     { "label": "Pets", "value": "Up to 2" },
@@ -83,7 +84,7 @@
   "how_it_works": [
     "Check out the photos and details here, then text or email us with any questions.",
     "[Schedule a tour: in person or a live video walkthrough.]",
-    "[Apply with the property manager (credit/background check, typically income about 3x rent).]",
+    "Apply with the property manager. No credit check.",
     "[Once approved, you sign a lease with the landlord and move in on your start date.]"
   ],
 
