@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>17 Mill Street Apartment</title>
+  <meta name="description" content="Apartment available for lease takeover (relet) at 17 Mill Street. Photos, rent, dates, costs, FAQ and contact info.">
+  <link rel="alternate" type="application/json" href="listing.json" title="Full listing data (machine readable)">
+  <link rel="alternate" type="text/plain" href="llms.txt" title="Guide for AI assistants">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="./" id="brand">17 Mill Street</a>
+      <span class="pill">🔑 Lease takeover</span>
+    </header>
+
+    <main id="app">
+      <noscript>
+        <p>This page needs JavaScript to display. All listing details are also available as plain data in <a href="listing.json">listing.json</a>.</p>
+      </noscript>
+    </main>
+
+    <footer id="footer"></footer>
+  </div>
+
+  <div class="sticky" id="sticky"></div>
+  <div class="lightbox" id="lightbox"><figure><img alt=""><p></p></figure></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+  (async () => {
+    const L = await loadListing();
+    const url = siteUrl(L);
+    const c = L.contact;
+    const smsBody = `Hi ${clean(c.name)}! I'm interested in the apartment at ${clean(L.address.street)}.`;
+    const mail = `mailto:${clean(c.email)}?subject=${encodeURIComponent("Apartment at " + clean(L.address.street))}&body=${encodeURIComponent(smsBody)}`;
+    const cover = (L.photos || [])[0];
+    const list = (arr) => (arr || []).map((x) => `<li>${esc(clean(x))}</li>`).join("");
+    const rows = (arr) => (arr || []).map((x) => `<dt>${esc(clean(x.label))}</dt><dd>${esc(clean(x.value))}</dd>`).join("");
+
+    document.title = `${clean(L.address.street)} · ${clean(L.rent)} · Apartment for relet`;
+
+    $("#app").innerHTML = `
+      <section class="hero">
+        <div class="hero-img">${cover
+          ? `<img src="${esc(cover.src)}" alt="${esc(cover.caption || "Apartment photo")}">`
+          : `<div class="no-photo">📸 Photos coming soon</div>`}</div>
+        <div>
+          <h1>${esc(clean(L.headline))}</h1>
+          <p class="lead">${esc(clean(L.tagline))}</p>
+          <div class="price">${esc(clean(L.rent))} <small>· available ${esc(clean(L.available))}</small></div>
+          <div class="actions">
+            <a class="btn primary" href="${smsHref(c.phone, smsBody)}">💬 Text ${esc(clean(c.name))}</a>
+            <a class="btn" href="${mail}">✉️ Email</a>
+            <button class="btn" id="share">🔗 Share</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="facts">
+        <div class="fact"><div class="k">Rent</div><div class="v">${esc(clean(L.rent))}</div></div>
+        <div class="fact"><div class="k">Move in</div><div class="v">${esc(clean(L.available))}</div></div>
+        <div class="fact"><div class="k">Lease ends</div><div class="v">${esc(clean(L.lease_ends))}</div></div>
+        <div class="fact"><div class="k">Size</div><div class="v">${esc(bedBath(L))}</div></div>
+        <div class="fact"><div class="k">Location</div><div class="v">${esc(clean(L.address.neighborhood))}, ${esc(clean(L.address.city))}</div></div>
+      </div>
+
+      ${(L.photos || []).length > 1 ? `
+      <section class="block">
+        <h2>Photos</h2>
+        <div class="gallery">${L.photos.map((p, i) => `<button data-i="${i}" aria-label="Open photo: ${esc(p.caption || "")}"><img loading="lazy" src="${esc(p.src)}" alt="${esc(p.caption || "Apartment photo")}"${p.fit === "contain" ? ` style="object-fit:contain;background:#fff"` : ""}></button>`).join("")}</div>
+      </section>` : ""}
+
+      <section class="block grid2">
+        <div class="card">
+          <h2>Why you'll like it</h2>
+          <ul class="check">${list(L.highlights)}</ul>
+        </div>
+        <div class="card">
+          <h2>What it costs</h2>
+          <dl class="rows">${rows(L.costs)}</dl>
+          ${(L.included || []).length ? `<p style="margin:14px 0 0;color:var(--muted)"><strong style="color:var(--ink)">Included in rent:</strong> ${esc(L.included.map(clean).join(", "))}</p>` : ""}
+        </div>
+      </section>
+
+      <section class="block grid2">
+        <div class="card">
+          <h2>Amenities</h2>
+          <ul class="check">${list(L.amenities)}</ul>
+        </div>
+        <div class="card">
+          <h2>Good to know</h2>
+          <dl class="rows">${rows(L.policies)}<dt>Furnished</dt><dd>${esc(clean(L.furnished))}</dd></dl>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>How taking over the lease works</h2>
+        <div class="card"><ol class="steps">${list(L.how_it_works)}</ol></div>
+      </section>
+
+      <section class="block grid2">
+        <div class="card">
+          <h2>The neighborhood</h2>
+          <p style="margin-top:0;color:var(--muted)">📍 ${esc(fullAddress(L))}<br>
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress(L))}" target="_blank" rel="noopener">Open in Google Maps →</a></p>
+          <ul class="check">${list(L.neighborhood)}</ul>
+        </div>
+        <div class="card">
+          <h2>Questions</h2>
+          ${(L.faq || []).map((f) => `<details><summary>${esc(clean(f.q))}</summary><p>${esc(clean(f.a))}</p></details>`).join("")}
+        </div>
+      </section>
+
+      <section class="block card contact">
+        <div>
+          <h2>Interested? Let's talk.</h2>
+          <p>${esc(clean(c.preferred))}. ${esc(clean(c.hours))}.</p>
+          <div class="actions" style="margin:0">
+            <a class="btn primary" href="${smsHref(c.phone, smsBody)}">💬 Text ${esc(clean(c.phone))}</a>
+            <a class="btn" href="${telHref(c.phone)}">📞 Call</a>
+            <a class="btn" href="${mail}">✉️ ${esc(clean(c.email))}</a>
+          </div>
+        </div>
+        <div class="qr-box" id="qr" title="Scan to open this page on your phone"></div>
+      </section>`;
+
+    $("#sticky").innerHTML = `
+      <a class="btn primary" href="${smsHref(c.phone, smsBody)}">💬 Text</a>
+      <a class="btn" href="${telHref(c.phone)}">📞 Call</a>
+      <button class="btn" id="share2">🔗 Share</button>`;
+
+    $("#footer").innerHTML = `${esc(clean(L.listing_type))} · ${esc(fullAddress(L))}<br>
+      <a href="listing.json">Listing data (JSON)</a> · <a href="llms.txt">For AI assistants</a> · <a href="kit.html">Marketing kit</a>`;
+
+    renderQR($("#qr"), url, 280);
+
+    const toast = (msg) => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1800); };
+    const share = async () => {
+      if (navigator.share) { try { await navigator.share({ title: document.title, text: texts.short(L), url }); } catch {} }
+      else { await copyText(url); toast("Link copied!"); }
+    };
+    $("#share").onclick = share;
+    $("#share2").onclick = share;
+
+    const lb = $("#lightbox");
+    $$(".gallery button").forEach((b) => b.onclick = () => {
+      const p = L.photos[b.dataset.i];
+      $("img", lb).src = p.src;
+      $("p", lb).textContent = p.caption || "";
+      lb.classList.add("open");
+    });
+    lb.onclick = () => lb.classList.remove("open");
+
+    // Structured data for search engines & AI crawlers that run JavaScript.
+    const ld = document.createElement("script");
+    ld.type = "application/ld+json";
+    ld.textContent = JSON.stringify({
+      "@context": "https://schema.org", "@type": "Apartment", name: clean(L.headline), description: clean(L.tagline), url,
+      numberOfRooms: clean(L.bedrooms), numberOfBathroomsTotal: clean(L.bathrooms),
+      floorSize: { "@type": "QuantitativeValue", value: clean(L.sqft), unitCode: "FTK" },
+      address: { "@type": "PostalAddress", streetAddress: clean(`${L.address.street} ${L.address.unit}`), addressLocality: clean(L.address.city), addressRegion: clean(L.address.state), postalCode: clean(L.address.zip) },
+      image: (L.photos || []).map((p) => url + p.src),
+    });
+    document.head.appendChild(ld);
+  })().catch((e) => {
+    $("#app").innerHTML = `<p>Couldn't load the listing (${esc(e.message)}). If you opened this file directly, run a local server instead. See README.md.</p>`;
+  });
+  </script>
+</body>
+</html>

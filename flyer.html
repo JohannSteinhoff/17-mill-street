@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Printable Flyer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page { size: letter; margin: 0; }
+    :root { --ink: #1d2b25; --accent: #2f6b4f; --soft: #e4efe8; --warm: #e8a33d; --muted: #5c6b64; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #ddd8cf; font-family: Inter, system-ui, sans-serif; color: var(--ink); }
+    .toolbar { position: sticky; top: 0; z-index: 2; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; padding: 12px 16px; background: #1d2b25; color: #fff; font-size: .9rem; align-items: center; }
+    .toolbar button, .toolbar a { font: 600 .9rem Inter, sans-serif; padding: 9px 14px; border-radius: 10px; border: 0; background: #fff; color: var(--ink); cursor: pointer; text-decoration: none; }
+    .toolbar button.primary { background: var(--warm); }
+    .scaler { padding: 24px 16px; overflow-x: auto; }
+
+    .page { width: 8.5in; height: 11in; margin: 0 auto; background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,.2); display: flex; flex-direction: column; overflow: hidden; }
+    .band { background: var(--accent); color: #fff; padding: .35in .5in .3in; }
+    .band .kicker { font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 13pt; color: #f6d9a8; }
+    .band h1 { font: 800 40pt/1.02 Fraunces, Georgia, serif; margin: .08in 0 0; }
+    .photo { height: 3.3in; background: linear-gradient(135deg, #e4efe8, #f6e7cf); display: grid; place-items: center; font: 600 20pt Fraunces, serif; color: var(--accent); }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
+    .body { flex: 1; display: grid; grid-template-columns: 1fr 2.2in; gap: .3in; padding: .3in .5in .2in; }
+    .price { font: 800 30pt Fraunces, serif; color: var(--accent); line-height: 1; }
+    .price small { font: 600 12pt Inter, sans-serif; color: var(--muted); }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: .12in 0 .14in; }
+    .chip { background: var(--soft); color: var(--accent); font-weight: 700; font-size: 11pt; padding: 4px 10px; border-radius: 99px; }
+    ul { margin: 0; padding: 0; list-style: none; font-size: 12.5pt; line-height: 1.45; }
+    li::before { content: "✓  "; color: var(--accent); font-weight: 800; }
+    .qr { text-align: center; }
+    .qr .box { border: 3px solid var(--ink); border-radius: 14px; padding: 10px; display: inline-block; }
+    .qr .box img, .qr .box canvas { width: 1.75in !important; height: 1.75in !important; }
+    .qr p { margin: 6px 0 0; font-weight: 700; font-size: 11pt; }
+    .qr .contact { margin-top: .12in; font-size: 11pt; color: var(--muted); }
+    .qr .contact strong { display: block; font-size: 14pt; color: var(--ink); }
+    .tabs { display: grid; grid-template-columns: repeat(8, 1fr); border-top: 2px dashed #999; height: 1.75in; }
+    .tab { border-right: 2px dashed #999; writing-mode: vertical-rl; transform: rotate(180deg); display: flex; justify-content: center; align-items: flex-start; padding: 8px 4px; font-size: 9pt; line-height: 1.25; text-align: left; }
+    .tab:first-child { border-right: 0; }
+    .tab strong { font-size: 10pt; }
+
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .scaler { padding: 0; }
+      .page { box-shadow: none; margin: 0; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button class="primary" onclick="print()">🖨️ Print / Save as PDF</button>
+    <button id="png">⬇️ Download as image</button>
+    <label><input type="checkbox" id="tearoffs" checked> Tear-off tabs</label>
+    <a href="kit.html">← Marketing kit</a>
+  </div>
+  <div class="scaler"><div class="page" id="page"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+  (async () => {
+    const L = await loadListing();
+    const url = siteUrl(L);
+    const shortUrl = url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+    const cover = (L.photos || [])[0];
+    const tab = `<div class="tab"><div><strong>${esc(clean(L.address.street))} · ${esc(clean(L.rent))}</strong><br>${esc(clean(L.contact.phone))}<br>${esc(shortUrl)}</div></div>`;
+
+    $("#page").innerHTML = `
+      <div class="band">
+        <div class="kicker">Apartment for lease takeover</div>
+        <h1>${esc(clean(L.headline))}</h1>
+      </div>
+      <div class="photo">${cover ? `<img src="${esc(cover.src)}" alt="">` : "📸 Add a cover photo in listing.json"}</div>
+      <div class="body">
+        <div>
+          <div class="price">${esc(clean(L.rent))} <small>· available ${esc(clean(L.available))}</small></div>
+          <div class="chips">
+            <span class="chip">${esc(clean(L.bedrooms))} bed</span>
+            <span class="chip">${esc(clean(L.bathrooms))} bath</span>
+            <span class="chip">${esc(clean(L.sqft))} sq ft</span>
+            <span class="chip">Lease thru ${esc(clean(L.lease_ends))}</span>
+          </div>
+          <ul>${(L.highlights || []).slice(0, 5).map((h) => `<li>${esc(clean(h))}</li>`).join("")}</ul>
+          <p style="margin:.12in 0 0;font-size:11pt;color:var(--muted)">📍 ${esc(fullAddress(L))}</p>
+        </div>
+        <div class="qr">
+          <div class="box" id="qr"></div>
+          <p>Scan for photos & details</p>
+          <div class="contact"><strong>Text ${esc(clean(L.contact.name))}</strong>${esc(clean(L.contact.phone))}</div>
+        </div>
+      </div>
+      <div class="tabs" id="tabs">${tab.repeat(8)}</div>`;
+
+    renderQR($("#qr"), url, 400);
+
+    $("#tearoffs").onchange = (e) => ($("#tabs").style.display = e.target.checked ? "" : "none");
+    $("#png").onclick = () => exportPng($("#page"), "17-mill-street-flyer.png", 3);
+  })();
+  </script>
+</body>
+</html>

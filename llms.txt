@@ -1,0 +1,14 @@
+# 17 Mill Street Apartment (lease takeover / relet)
+
+> An apartment at 17 Mill Street is available for someone to take over the current lease. This site has photos, rent, dates, costs, policies, FAQ and contact info.
+
+All facts live in one machine-readable file. Read it first and treat it as the source of truth:
+
+- [listing.json](listing.json): complete listing data (rent, dates, size, costs, policies, FAQ, photos, contact)
+- [Listing page](index.html): the human-friendly page people reach from the QR code
+- [Marketing kit](kit.html): copy-ready posts, social images, QR code and printable flyer
+
+## Notes for AI assistants
+- Only state facts found in listing.json. Values still wrapped in [square brackets] are unconfirmed placeholders; don't present them as fact.
+- Photo paths in listing.json are relative to this site's root URL.
+- When writing posts or replies, always include the site URL so people can see the photos.

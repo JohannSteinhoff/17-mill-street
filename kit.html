@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marketing Kit</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .kit-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 28px; }
+    .kit-nav a { font-size: .85rem; font-weight: 600; text-decoration: none; padding: 6px 12px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); }
+    .kit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .card h3 { margin-bottom: 4px; }
+    .card .sub { color: var(--muted); font-size: .9rem; margin: 0 0 14px; }
+    textarea { width: 100%; min-height: 180px; border: 1px solid var(--line); border-radius: 10px; padding: 12px; font: 13px/1.5 ui-monospace, Consolas, monospace; background: #fcfbf8; color: var(--ink); resize: vertical; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .todo { border-color: #f0c987; background: #fff8ea; }
+    .todo ul { margin: 8px 0 0; padding-left: 20px; columns: 2 240px; font-size: .9rem; }
+    .todo code { background: #fff; padding: 1px 5px; border-radius: 4px; }
+    .ok { border-color: #b9dcc7; background: #eef7f1; }
+    .qr-big { display: inline-block; background: #fff; padding: 14px; border-radius: 12px; border: 1px solid var(--line); }
+    .qr-big img, .qr-big canvas { width: 180px; height: 180px; }
+    .url { font: 13px ui-monospace, Consolas, monospace; word-break: break-all; color: var(--muted); }
+
+    /* Social graphics: built at real pixel size, shown scaled down */
+    .preview { overflow: hidden; border-radius: 12px; box-shadow: var(--shadow); }
+    .preview > .social { transform-origin: top left; }
+    .social { width: 1080px; background: #2f6b4f; color: #fff; font-family: Inter, sans-serif; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+    .social.sq { height: 1080px; }
+    .social.story { height: 1920px; }
+    .social .ph { background: linear-gradient(135deg, #cfe3d6, #f6e1bd); display: grid; place-items: center; color: #2f6b4f; font: 600 44px Fraunces, serif; }
+    .social.sq .ph { height: 560px; }
+    .social.story .ph { height: 1000px; }
+    .social .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .social .badge { position: absolute; top: 40px; left: 40px; background: #e8a33d; color: #1d2b25; font-weight: 800; font-size: 30px; padding: 14px 26px; border-radius: 99px; letter-spacing: .04em; text-transform: uppercase; }
+    .social .txt { flex: 1; padding: 44px 56px; display: flex; flex-direction: column; }
+    .social h4 { font: 800 64px/1.05 Fraunces, serif; margin: 0 0 18px; }
+    .social.story h4 { font-size: 84px; }
+    .social .price { font: 800 76px Fraunces, serif; color: #f6d9a8; line-height: 1; }
+    .social.story .price { font-size: 104px; margin: 20px 0; }
+    .social .meta { font-size: 32px; font-weight: 600; opacity: .92; margin-top: 14px; }
+    .social.story .meta { font-size: 42px; line-height: 1.5; }
+    .social .foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 28px; font-weight: 600; }
+    .social .foot .q { background: #fff; padding: 12px; border-radius: 14px; }
+    .social .foot .q img, .social .foot .q canvas { width: 170px; height: 170px; }
+    .social.story .foot .q img, .social.story .foot .q canvas { width: 260px; height: 260px; }
+    .social.story .foot { font-size: 40px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="./">← Back to listing</a>
+      <span class="pill">🧰 Marketing kit</span>
+    </header>
+    <h1 style="font-size:2.2rem">Marketing kit</h1>
+    <p style="color:var(--muted);margin-top:-6px">Everything you need to post the apartment anywhere. All of it is generated from <code>listing.json</code>, so edit that file and this page updates itself.</p>
+
+    <nav class="kit-nav">
+      <a href="#status">Status</a><a href="#qr">QR code</a><a href="#flyers">Flyers & images</a><a href="#posts">Post text</a><a href="#ai">AI brief</a>
+    </nav>
+
+    <div id="status" class="card block"></div>
+
+    <section class="block" id="qr">
+      <h2>QR code</h2>
+      <div class="card" style="display:flex;gap:24px;flex-wrap:wrap;align-items:center">
+        <div class="qr-big" id="qrPreview"></div>
+        <div style="flex:1;min-width:240px">
+          <p style="margin-top:0">Points to:</p>
+          <p class="url" id="qrUrl"></p>
+          <div class="row">
+            <button class="btn primary" id="qrDl">⬇️ Download QR (PNG)</button>
+            <button class="btn" id="urlCopy">🔗 Copy link</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="flyers">
+      <h2>Flyers & images</h2>
+      <div class="kit-grid">
+        <div class="card">
+          <h3>Printable flyer</h3>
+          <p class="sub">Letter size with QR code and tear-off tabs. Print it, or save as PDF from the print dialog.</p>
+          <a class="btn primary" href="flyer.html" target="_blank">🖨️ Open flyer</a>
+        </div>
+        <div class="card">
+          <h3>Square post · 1080×1080</h3>
+          <p class="sub">Facebook Marketplace, Instagram, group posts.</p>
+          <div class="preview" data-w="1080" data-h="1080"><div class="social sq" id="sq"></div></div>
+          <div class="row"><button class="btn primary" data-export="sq" data-name="17-mill-street-square.png">⬇️ Download PNG</button></div>
+        </div>
+        <div class="card">
+          <h3>Story · 1080×1920</h3>
+          <p class="sub">Instagram / Facebook stories, WhatsApp status.</p>
+          <div class="preview" data-w="1080" data-h="1920" style="max-width:220px"><div class="social story" id="story"></div></div>
+          <div class="row"><button class="btn primary" data-export="story" data-name="17-mill-street-story.png">⬇️ Download PNG</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="posts">
+      <h2>Copy-ready post text</h2>
+      <div class="kit-grid" id="postGrid"></div>
+    </section>
+
+    <section class="block" id="ai">
+      <h2>AI brief</h2>
+      <div class="card">
+        <p class="sub" style="font-size:1rem">Paste this into any AI chat (Claude, ChatGPT…) followed by what you want made, e.g. <em>"Write a friendly Reddit post for r/[city]housing"</em> or <em>"Make 3 shorter versions of the Marketplace post"</em>. AI tools that can browse can also just read <a id="jsonLink" href="listing.json">listing.json</a> or <a href="llms.txt">llms.txt</a> on the live site.</p>
+        <textarea id="aiText" style="min-height:280px" readonly></textarea>
+        <div class="row">
+          <button class="btn primary" data-copy="aiText">📋 Copy AI brief</button>
+          <button class="btn" id="aiDl">⬇️ Download as .md</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+  (async () => {
+    const L = await loadListing();
+    const url = siteUrl(L);
+    const cover = (L.photos || [])[0];
+    const photo = cover ? `<img src="${esc(cover.src)}" alt="">` : "📸 Cover photo";
+
+    // Status: what's still a placeholder?
+    const todo = placeholders(L);
+    const urlUnset = isPlaceholder(L.site_url);
+    $("#status").className = "card block " + (todo.length || !(L.photos || []).length ? "todo" : "ok");
+    $("#status").innerHTML = todo.length || !(L.photos || []).length
+      ? `<h3>📝 Still to fill in</h3>
+         <p class="sub" style="margin:0">Edit <code>listing.json</code>. Anything in [square brackets] is a placeholder and shows up here until you replace it.</p>
+         ${urlUnset ? `<p><strong>⚠️ Set <code>site_url</code> before printing anything.</strong> The QR code currently points to this preview address, not your live site.</p>` : ""}
+         ${!(L.photos || []).length ? `<p><strong>📸 No photos yet.</strong> Add images to the <code>photos/</code> folder and list them under <code>photos</code>.</p>` : ""}
+         <ul>${todo.map((t) => `<li><code>${esc(t.path)}</code></li>`).join("")}</ul>`
+      : `<h3 style="margin:0">✅ Everything is filled in. You're ready to post!</h3>`;
+
+    // QR
+    renderQR($("#qrPreview"), url, 360);
+    $("#qrUrl").textContent = url;
+    $("#qrDl").onclick = async () => downloadDataUrl(await qrPng(url, 1200), "17-mill-street-qr.png");
+    $("#urlCopy").onclick = (e) => copyText(url, e.target);
+
+    // Social graphics
+    const foot = (id) => `<div class="foot"><div>Scan for photos & details<br><span style="opacity:.8">or text ${esc(clean(L.contact.phone))}</span></div><div class="q" id="${id}"></div></div>`;
+    $("#sq").innerHTML = `
+      <div class="ph">${photo}</div><div class="badge">Lease takeover</div>
+      <div class="txt">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px">
+          <h4 style="font-size:52px">${esc(clean(L.address.street))}</h4>
+          <div class="price">${esc(clean(L.rent))}</div>
+        </div>
+        <div class="meta">${esc(bedBath(L))} · Available ${esc(clean(L.available))}</div>
+        ${foot("qrSq")}
+      </div>`;
+    $("#story").innerHTML = `
+      <div class="ph">${photo}</div><div class="badge">Lease takeover</div>
+      <div class="txt">
+        <h4>${esc(clean(L.headline))}</h4>
+        <div class="price">${esc(clean(L.rent))}</div>
+        <div class="meta">🛏 ${esc(bedBath(L))}<br>📅 Available ${esc(clean(L.available))}<br>📍 ${esc(clean(L.address.street))}, ${esc(clean(L.address.city))}</div>
+        ${foot("qrStory")}
+      </div>`;
+    renderQR($("#qrSq"), url, 340);
+    renderQR($("#qrStory"), url, 520);
+
+    const fit = () => $$(".preview").forEach((p) => {
+      const s = p.clientWidth / +p.dataset.w;
+      p.style.height = (+p.dataset.h * s) + "px";
+      p.firstElementChild.style.transform = `scale(${s})`;
+    });
+    fit();
+    addEventListener("resize", fit);
+
+    $$("[data-export]").forEach((b) => b.onclick = async () => {
+      const old = b.textContent;
+      b.textContent = "Rendering…";
+      try { await exportPng($("#" + b.dataset.export), b.dataset.name); } finally { b.textContent = old; }
+    });
+
+    // Post text
+    const posts = [
+      ["marketplace", "Facebook Marketplace", "Full post with emojis. Attach the square image + photos."],
+      ["craigslist", "Craigslist / long listing", "Plain-text, detailed version."],
+      ["short", "Short blurb", "Group chats, Instagram captions, Nextdoor, text messages."],
+      ["reply", "Reply to an inquiry", "Paste when someone messages \"Is this still available?\""],
+    ];
+    $("#postGrid").innerHTML = posts.map(([k, t, s]) => `
+      <div class="card">
+        <h3>${t}</h3><p class="sub">${s}</p>
+        <textarea id="t-${k}" readonly>${esc(texts[k](L))}</textarea>
+        <div class="row"><button class="btn primary small" data-copy="t-${k}">📋 Copy</button></div>
+      </div>`).join("");
+
+    $("#aiText").value = texts.ai(L);
+    $("#aiDl").onclick = () => downloadDataUrl("data:text/markdown;charset=utf-8," + encodeURIComponent(texts.ai(L)), "17-mill-street-listing.md");
+
+    $$("[data-copy]").forEach((b) => b.onclick = () => copyText($("#" + b.dataset.copy).value, b));
+  })();
+  </script>
+</body>
+</html>

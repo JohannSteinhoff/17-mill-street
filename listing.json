@@ -1,0 +1,99 @@
+{
+  "_readme": "THIS IS THE ONLY FILE YOU NEED TO EDIT. Every page, flyer, post and AI brief is generated from it. Anything still in [square brackets] is a placeholder; the Marketing Kit page lists what's left to fill in.",
+
+  "site_url": "https://johannsteinhoff.github.io/17-mill-street/",
+
+  "title": "17 Mill Street, Apt 34107",
+  "headline": "[Bright 1-bedroom], ready for you to take over",
+  "tagline": "[Private 1 bed / 1 bath at Copper Beech, minutes from Texas State, with a resort-style pool, 24-hour gym and study room. Take over my lease and move in as early as January.]",
+  "listing_type": "Lease takeover (relet)",
+
+  "address": {
+    "street": "17 Mill Street",
+    "unit": "Apt 34107",
+    "city": "San Marcos",
+    "state": "TX",
+    "zip": "[78666]",
+    "neighborhood": "Copper Beech, near Texas State"
+  },
+
+  "rent": "$[1,450]/mo",
+  "available": "[January 1, 2027]",
+  "lease_ends": "[July 31, 2027]",
+  "bedrooms": "1",
+  "bathrooms": "1",
+  "sqft": "[650]",
+  "furnished": "[Unfurnished]",
+
+  "highlights": [
+    "[Lots of natural light, big windows]",
+    "[In-unit washer & dryer]",
+    "[5-minute walk to grocery store and bus stop]",
+    "[Responsive, friendly management]"
+  ],
+
+  "costs": [
+    { "label": "Monthly rent", "value": "$[1,450]" },
+    { "label": "Security deposit", "value": "$[1,450] (paid to landlord)" },
+    { "label": "Application / relet fee", "value": "$[50] application, $[0] relet fee" },
+    { "label": "Utilities (estimate)", "value": "~$[90]/mo electric + internet" }
+  ],
+
+  "included": [
+    "[Water, sewer & trash]",
+    "[One parking space]"
+  ],
+
+  "amenities": [
+    "Resort-style pool and hot tub",
+    "24-hour fitness center",
+    "24-hour study room",
+    "Basketball and volleyball courts",
+    "Free on-site parking"
+  ],
+
+  "policies": [
+    { "label": "Pets", "value": "[Cats OK, dogs under 40 lb, $300 deposit]" },
+    { "label": "Parking", "value": "[1 assigned spot included]" },
+    { "label": "Laundry", "value": "[In unit]" },
+    { "label": "Smoking", "value": "[Non-smoking building]" }
+  ],
+
+  "how_it_works": [
+    "Check out the photos and details here, then text or email me with any questions.",
+    "[Schedule a tour: in person or a live video walkthrough.]",
+    "[Apply with the property manager (credit/background check, typically income about 3x rent).]",
+    "[Once approved, you sign a lease with the landlord and move in on your start date.]"
+  ],
+
+  "neighborhood": [
+    "On the Texas State shuttle route",
+    "Minutes from the Texas State campus and Bobcat Stadium",
+    "[Grocery store: X min drive]"
+  ],
+
+  "faq": [
+    { "q": "What is a relet?", "a": "I'm moving out before my lease ends, so the landlord lets a new tenant take over the apartment. You get approved by the landlord and the rest of the lease becomes yours." },
+    { "q": "Can the lease be extended past the end date?", "a": "[Usually yes. The landlord typically offers a renewal before the lease ends.]" },
+    { "q": "Can I see it before applying?", "a": "Absolutely. Text me to set up an in-person tour or a live video walkthrough." },
+    { "q": "Who do I pay rent to?", "a": "[Directly to the property manager through their online portal.]" }
+  ],
+
+  "photos": [
+    { "src": "photos/01-bedroom.webp", "caption": "Bedroom" },
+    { "src": "photos/02-pool-patio.webp", "caption": "Pool and patio" },
+    { "src": "photos/03-fitness-center.webp", "caption": "24-hour fitness center" },
+    { "src": "photos/04-floorplan.webp", "caption": "Floor plan: 1 bed / 1 bath", "fit": "contain" }
+  ],
+  "_photos_help": "Put images in the photos/ folder and list them like: { \"src\": \"photos/01-living-room.jpg\", \"caption\": \"Living room\" }. The first photo is the cover image. Add \"fit\": \"contain\" for floor plans so they aren't cropped.",
+
+  "contact": {
+    "name": "Johann",
+    "phone": "[(555) 555-5555]",
+    "email": "[you@example.com]",
+    "preferred": "Text is fastest",
+    "hours": "[Usually replies within a few hours]"
+  },
+
+  "notes_for_ai": "Only state facts that appear in this file. If something isn't listed, say to contact the lister. Always include the site URL so people can see photos."
+}
