@@ -33,9 +33,13 @@
     .social.sq { height: 1080px; }
     .social.story { height: 1920px; }
     .social .ph { background: linear-gradient(135deg, #cfe3d6, #f6e1bd); display: grid; place-items: center; color: #2f6b4f; font: 600 44px Fraunces, serif; }
-    .social.sq .ph { height: 560px; }
+    .social .ph { flex: none; position: relative; overflow: hidden; }
+    .social.sq .ph { height: 470px; }
     .social.story .ph { height: 1000px; }
-    .social .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .social .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .social .ptag { position: absolute; top: 36px; right: 40px; background: #fff; color: #1f4d3a; border-radius: 22px; padding: 16px 26px 12px; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
+    .social .ptag b { display: block; font: 800 72px/1 Fraunces, serif; }
+    .social .ptag span { font-size: 22px; font-weight: 700; color: #5c6b64; text-transform: uppercase; letter-spacing: .06em; }
     .social .badge { position: absolute; top: 40px; left: 40px; background: #e8a33d; color: #1d2b25; font-weight: 800; font-size: 30px; padding: 14px 26px; border-radius: 99px; letter-spacing: .04em; text-transform: uppercase; }
     .social .txt { flex: 1; padding: 44px 56px; display: flex; flex-direction: column; }
     .social h4 { font: 800 64px/1.05 Fraunces, serif; margin: 0 0 18px; }
@@ -155,12 +159,10 @@
     const foot = (id) => `<div class="foot"><div>Scan for photos & details<br><span style="opacity:.8">or text ${esc(clean(L.contact.phone))}</span></div><div class="q" id="${id}"></div></div>`;
     $("#sq").innerHTML = `
       <div class="ph">${photo}</div><div class="badge">Lease takeover</div>
+      <div class="ptag"><b>${esc(clean(L.rent).replace(/\/mo.*$/, ""))}</b><span>/ month · whole apt</span></div>
       <div class="txt">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px">
-          <h4 style="font-size:52px">${esc(clean(L.address.street))}</h4>
-          <div class="price">${esc(clean(L.rent))}</div>
-        </div>
-        <div class="meta">${esc(bedBath(L))} · Available ${esc(clean(L.available))}</div>
+        <h4 style="font-size:50px;margin-bottom:6px">${esc(clean(L.headline))}</h4>
+        <div class="meta" style="margin-top:0">🚌 ${esc(clean(L.commute))}<br>${esc(clean(L.furnished))} · Available ${esc(clean(L.available))}</div>
         ${foot("qrSq")}
       </div>`;
     $("#story").innerHTML = `
@@ -168,7 +170,7 @@
       <div class="txt">
         <h4>${esc(clean(L.headline))}</h4>
         <div class="price">${esc(clean(L.rent))}</div>
-        <div class="meta">🛏 ${esc(bedBath(L))}<br>📅 Available ${esc(clean(L.available))}<br>📍 ${esc(clean(L.address.street))}, ${esc(clean(L.address.city))}</div>
+        <div class="meta">🛏 ${esc(bedBath(L))} · ${esc(clean(L.furnished))}<br>🚌 ${esc(clean(L.commute))}<br>📅 Available ${esc(clean(L.available))}<br>📍 ${esc(clean(L.address.street))}, ${esc(clean(L.address.city))}</div>
         ${foot("qrStory")}
       </div>`;
     renderQR($("#qrSq"), url, 340);

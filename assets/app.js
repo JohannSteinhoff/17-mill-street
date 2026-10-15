@@ -58,6 +58,7 @@ const texts = {
 
 📍 ${L.address.street}, ${L.address.city} (${L.address.neighborhood})
 🛏 ${L.bedrooms} bed · 🛁 ${L.bathrooms} bath · ${L.sqft} sq ft
+🚌 ${L.commute}
 📅 Available ${L.available} · lease runs through ${L.lease_ends}
 
 ${L.star_feature ? `🧺 ${L.star_feature}
@@ -81,7 +82,7 @@ This is a ${L.listing_type.toLowerCase()}. You'd be approved by the landlord and
   },
 
   short(L) {
-    return clean(`🏡 ${L.bedrooms}BR/${L.bathrooms}BA at ${L.address.street}, ${L.address.city}: ${L.rent}. Available ${L.available} (lease takeover through ${L.lease_ends}).${L.star_feature ? " " + L.star_feature : ""} Photos & details: ${siteUrl(L)}`);
+    return clean(`🏡 ${L.bedrooms}BR/${L.bathrooms}BA at ${L.address.street}, ${L.address.city}: ${L.rent}. Available ${L.available} (lease takeover through ${L.lease_ends}). ${L.commute}.${L.star_feature ? " " + L.star_feature : ""} Photos & details: ${siteUrl(L)}`);
   },
 
   craigslist(L) {
@@ -95,7 +96,8 @@ ${L.star_feature ? `
 THE BASICS
 - Address: ${fullAddress(L)}
 - Rent: ${L.rent}
-- Size: ${L.bedrooms} bed / ${L.bathrooms} bath / ${L.sqft} sq ft, ${L.furnished}
+- Size: ${L.bedrooms} bed / ${L.bathrooms} bath / ${L.sqft} sq ft, ${L.furnished} (no roommates)
+- Commute: ${L.commute}
 - Available: ${L.available}
 - Lease ends: ${L.lease_ends} (${L.listing_type})
 
@@ -122,7 +124,7 @@ Contact ${L.contact.name}: ${L.contact.phone} / ${L.contact.email} (${L.contact.
     return clean(
 `Hi! Thanks for reaching out about ${L.address.street}. Yes, it's still available.
 
-Quick rundown: ${L.bedrooms} bed / ${L.bathrooms} bath, ${L.rent}, available ${L.available}, and the lease runs through ${L.lease_ends}. You'd apply with the property manager and take over the lease.
+Quick rundown: it's your own ${L.bedrooms} bed / ${L.bathrooms} bath (no roommates), ${L.furnished.toLowerCase()}, ${L.rent} for the whole place, ${L.commute.charAt(0).toLowerCase() + L.commute.slice(1)}, available ${L.available}, and the lease runs through ${L.lease_ends}. You'd apply with the property manager and take over the lease.
 
 Everything (photos, costs, FAQ) is here: ${siteUrl(L)}
 
@@ -143,7 +145,8 @@ Source of truth: ${siteUrl(L)}listing.json · Website: ${siteUrl(L)}
 - Rent: ${clean(L.rent)}
 - Available: ${clean(L.available)}
 - Lease ends: ${clean(L.lease_ends)}
-- Size: ${bedBath(L)}, ${clean(L.furnished)}
+- Size: ${bedBath(L)}, ${clean(L.furnished)}, no roommates
+- Commute: ${clean(L.commute)}
 - Headline: ${clean(L.headline)}
 - Summary: ${clean(L.tagline)}
 - Standout feature: ${clean(L.star_feature)}

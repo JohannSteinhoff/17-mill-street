@@ -34,8 +34,9 @@
     .price-tag b { display: block; font: 800 28pt/1 Fraunces, Georgia, serif; }
     .price-tag span { font-size: 9pt; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
     .hero-text { left: .45in; right: .45in; bottom: .28in; }
-    .hero-text h1 { font: 800 34pt/1.03 Fraunces, Georgia, serif; margin: 0 0 8px; text-shadow: 0 2px 12px rgba(0,0,0,.3); }
-    .hero-text p { margin: 0; font-size: 12pt; font-weight: 600; opacity: .95; }
+    .hero-text h1 { font: 800 40pt/1.02 Fraunces, Georgia, serif; margin: 0 0 8px; text-shadow: 0 2px 12px rgba(0,0,0,.3); }
+    .hero-text p { margin: 0; font-size: 14pt; font-weight: 700; color: #f6d9a8; }
+    .hero-text p.addr { margin-top: 4px; font-size: 11pt; font-weight: 600; color: #fff; opacity: .9; }
 
     /* Body: details on the left, floor plan + QR on the right */
     .main { display: grid; grid-template-columns: 1fr 3.3in; gap: .28in; padding: .3in .45in .28in; }
@@ -110,10 +111,11 @@
       <section class="hero">
         ${cover ? `<img src="${esc(cover.src)}" alt="">` : ""}
         <div class="badge">Lease takeover</div>
-        <div class="price-tag"><b>${esc(clean(L.rent).replace(/\/mo.*$/, ""))}</b><span>per month</span></div>
+        <div class="price-tag"><b>${esc(clean(L.rent).replace(/\/mo.*$/, ""))}</b><span>/ month · whole apt</span></div>
         <div class="hero-text">
-          <h1>${esc(clean(L.headline))}</h1>
-          <p>📍 ${esc(clean(a.street))} · ${esc(clean(a.city))}, ${esc(clean(a.state))} · ${esc(clean(a.neighborhood))}</p>
+          <h1>${esc(clean(L.headline)).replace(/(\d+-\w+)/g, '<span style="white-space:nowrap">$1</span>')}</h1>
+          <p>${L.commute ? `🚌 ${esc(clean(L.commute))}` : ""}</p>
+          <p class="addr">📍 ${esc(clean(a.street))} · ${esc(clean(a.city))}, ${esc(clean(a.state))} · ${esc(clean(a.neighborhood))}</p>
         </div>
       </section>
 

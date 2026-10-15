@@ -4,10 +4,11 @@
   "site_url": "https://johannsteinhoff.github.io/17-mill-street/",
 
   "title": "1701 Mill Street, Apt 34107",
-  "headline": "Fully furnished 1-bedroom, ready for you to take over",
-  "tagline": "[Private 1 bed / 1 bath at Copper Beech, minutes from Texas State, with a resort-style pool, 24-hour gym and study room. Take over my lease and move in as early as January.]",
+  "headline": "Your own 1-bedroom. No roommates.",
+  "tagline": "Skip the 4-person roommate setup. This fully furnished 1 bed / 1 bath at Copper Beech is all yours, with a resort-style pool, 24-hour gym and study room.",
   "listing_type": "Lease takeover (relet)",
 
+  "commute": "On the Route 22 bus loop, about 10 minutes to Texas State University",
   "star_feature": "Washer & dryer built right into the bedroom closet. You don't even have to leave your closet to do laundry!",
   "_star_feature_help": "Your #1 selling point. It gets a big callout on the website and flyer and leads every post.",
 
@@ -17,7 +18,7 @@
     "city": "San Marcos",
     "state": "TX",
     "zip": "78666",
-    "neighborhood": "Copper Beech, near Texas State"
+    "neighborhood": "Copper Beech, near Texas State University"
   },
 
   "rent": "$1,000/mo",
@@ -30,7 +31,7 @@
 
   "highlights": [
     "Fully furnished: just move in",
-    "Your own place, no roommates",
+    "$1,000 is for the whole apartment, not per bed",
     "[Responsive, friendly management]"
   ],
 
@@ -68,8 +69,7 @@
   ],
 
   "neighborhood": [
-    "On the Texas State shuttle route",
-    "Minutes from the Texas State campus and Bobcat Stadium"
+    "Minutes from the Texas State University campus and Bobcat Stadium"
   ],
 
   "faq": [

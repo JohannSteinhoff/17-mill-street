@@ -55,8 +55,9 @@
           ? `<img src="${esc(cover.src)}" alt="${esc(cover.caption || "Apartment photo")}">`
           : `<div class="no-photo">📸 Photos coming soon</div>`}</div>
         <div>
-          <h1>${esc(clean(L.headline))}</h1>
+          <h1>${esc(clean(L.headline)).replace(/(\d+-\w+)/g, '<span style="white-space:nowrap">$1</span>')}</h1>
           <p class="lead">${esc(clean(L.tagline))}</p>
+          ${L.commute ? `<p class="commute">🚌 ${esc(clean(L.commute))}<br><span>📍 ${esc(clean(L.address.street))}, ${esc(clean(L.address.city))} · ${esc(clean(L.address.neighborhood))}</span></p>` : ""}
           <div class="price">${esc(clean(L.rent))} <small>· available ${esc(clean(L.available))}</small></div>
           <div class="actions">
             <a class="btn primary" href="${smsHref(c.phone, smsBody)}">💬 Text ${esc(clean(c.name))}</a>
@@ -69,11 +70,12 @@
       ${L.star_feature ? `<div class="star"><span>🧺</span><div><small>Best part</small>${esc(clean(L.star_feature))}</div></div>` : ""}
 
       <div class="facts">
-        <div class="fact"><div class="k">Rent</div><div class="v">${esc(clean(L.rent))}</div></div>
+        <div class="fact hl"><div class="k">Layout</div><div class="v">${esc(clean(L.bedrooms))} bed / ${esc(clean(L.bathrooms))} bath<br><span>No roommates</span></div></div>
+        <div class="fact"><div class="k">Rent</div><div class="v">${esc(clean(L.rent))}<br><span>whole apartment</span></div></div>
+        ${L.commute ? `<div class="fact"><div class="k">To campus</div><div class="v">~10 min<br><span>Route 22 bus</span></div></div>` : ""}
         <div class="fact"><div class="k">Move in</div><div class="v">${esc(clean(L.available))}</div></div>
         <div class="fact"><div class="k">Lease ends</div><div class="v">${esc(clean(L.lease_ends))}</div></div>
-        <div class="fact"><div class="k">Size</div><div class="v">${esc(bedBath(L))}</div></div>
-        <div class="fact"><div class="k">Location</div><div class="v">${esc(clean(L.address.neighborhood))}, ${esc(clean(L.address.city))}</div></div>
+        <div class="fact"><div class="k">Size</div><div class="v">${esc(clean(L.sqft))} sq ft<br><span>${esc(clean(L.furnished))}</span></div></div>
       </div>
 
       ${plan ? `
