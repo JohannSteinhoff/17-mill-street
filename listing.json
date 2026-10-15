@@ -3,7 +3,7 @@
 
   "site_url": "https://johannsteinhoff.github.io/17-mill-street/",
 
-  "title": "17 Mill Street, Apt 34107",
+  "title": "1701 Mill Street, Apt 34107",
   "headline": "[Bright 1-bedroom], ready for you to take over",
   "tagline": "[Private 1 bed / 1 bath at Copper Beech, minutes from Texas State, with a resort-style pool, 24-hour gym and study room. Take over my lease and move in as early as January.]",
   "listing_type": "Lease takeover (relet)",
@@ -12,11 +12,11 @@
   "_star_feature_help": "Your #1 selling point. It gets a big callout on the website and flyer and leads every post.",
 
   "address": {
-    "street": "17 Mill Street",
+    "street": "1701 Mill Street",
     "unit": "Apt 34107",
     "city": "San Marcos",
     "state": "TX",
-    "zip": "[78666]",
+    "zip": "78666",
     "neighborhood": "Copper Beech, near Texas State"
   },
 

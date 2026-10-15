@@ -1,4 +1,4 @@
-# 17 Mill Street: relet website & marketing kit
+# 1701 Mill Street: relet website & marketing kit
 
 A small static site for finding someone to take over the lease. It's hosted free on GitHub Pages, and people reach it by QR code.
 

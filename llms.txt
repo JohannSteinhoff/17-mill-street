@@ -1,6 +1,6 @@
-# 17 Mill Street Apartment (lease takeover / relet)
+# 1701 Mill Street Apartment (lease takeover / relet)
 
-> An apartment at 17 Mill Street is available for someone to take over the current lease. This site has photos, rent, dates, costs, policies, FAQ and contact info.
+> An apartment at 1701 Mill Street is available for someone to take over the current lease. This site has photos, rent, dates, costs, policies, FAQ and contact info.
 
 All facts live in one machine-readable file. Read it first and treat it as the source of truth:
 
