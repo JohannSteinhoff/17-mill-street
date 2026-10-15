@@ -37,7 +37,7 @@
 
   "costs": [
     { "label": "Monthly rent", "value": "$1,000" },
-    { "label": "Security deposit", "value": "$[1,000] (paid to landlord)" },
+    { "label": "Security deposit", "value": "$1,000 (paid to landlord)" },
     { "label": "Application / relet fee", "value": "$[50] application, $[0] relet fee" },
     { "label": "Utilities (estimate)", "value": "~$[90]/mo electric + internet" }
   ],
