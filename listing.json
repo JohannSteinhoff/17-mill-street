@@ -51,7 +51,7 @@
     { "label": "Utilities", "value": "Water, electric, sewer + trash (you pay)" },
     { "label": "Pets", "value": "Up to 2" },
     { "label": "Parking", "value": "Free on-site" },
-    { "label": "Amenities", "value": "Pool, hot tub, 24-hr gym, study room" }
+    { "label": "Amenities", "value": "Pool, 24-hr gym, study room" }
   ],
   "_quick_facts_help": "Short one-liners for the website's Details grid. Keep each value brief.",
 
@@ -67,7 +67,7 @@
   ],
 
   "amenities": [
-    "Resort-style pool and hot tub",
+    "Resort-style pool",
     "24-hour fitness center",
     "Study room",
     "Basketball and volleyball courts",
