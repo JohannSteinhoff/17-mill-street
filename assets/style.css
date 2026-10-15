@@ -150,3 +150,8 @@ footer { color: var(--muted); font-size: .8rem; padding: 22px 0 110px; border-to
 .facts dt { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .facts dd { margin: 2px 0 0; font-weight: 700; }
 @media (max-width: 760px) { .facts { grid-template-columns: 1fr 1fr; column-gap: 16px; } .facts dd { font-size: .92rem; } }
+
+/* Embedded map */
+.map { aspect-ratio: 16 / 9; border: 1px solid var(--rule); margin: 0 0 16px; background: #eee; }
+.map iframe { width: 100%; height: 100%; border: 0; display: block; }
+@media (max-width: 760px) { .map { aspect-ratio: 4 / 3; } }

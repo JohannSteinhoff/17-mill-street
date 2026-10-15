@@ -131,6 +131,8 @@
       ${section("Location", `
         <h2>${esc(fullAddress(L))}</h2>
         <ul class="points">${(L.neighborhood || []).map((x) => `<li>${esc(clean(x))}</li>`).join("")}</ul>
+        <div class="map"><iframe title="Map of ${esc(clean(a.street))}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=${encodeURIComponent(`${clean(a.neighborhood).split(",")[0]} ${clean(a.city)}, ${fullAddress(L)}`)}&z=15&output=embed"></iframe></div>
         <a class="btn small" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress(L))}" target="_blank" rel="noopener">Open in Google Maps</a>`)}
 
       ${section("Questions", (L.faq || []).map((f) => `<details><summary>${esc(clean(f.q))}</summary><p>${esc(clean(f.a))}</p></details>`).join(""))}
