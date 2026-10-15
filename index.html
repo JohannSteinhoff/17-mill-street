@@ -44,6 +44,7 @@
     const mail = `mailto:${clean(c.email)}?subject=${encodeURIComponent("Apartment at " + clean(L.address.street))}&body=${encodeURIComponent(smsBody)}`;
     const cover = (L.photos || [])[0];
     const plan = floorPlan(L);
+    const gallery = (L.photos || []).filter((p) => p !== plan); // floor plan has its own section
     const list = (arr) => (arr || []).map((x) => `<li>${esc(clean(x))}</li>`).join("");
     const rows = (arr) => (arr || []).map((x) => `<dt>${esc(clean(x.label))}</dt><dd>${esc(clean(x.value))}</dd>`).join("");
 
@@ -88,10 +89,10 @@
         <img src="${esc(plan.src)}" alt="Floor plan" id="planImg">
       </section>` : ""}
 
-      ${(L.photos || []).length > 1 ? `
+      ${gallery.length > 1 ? `
       <section class="block">
         <h2>Photos</h2>
-        <div class="gallery">${L.photos.map((p, i) => `<button data-i="${i}" aria-label="Open photo: ${esc(p.caption || "")}"><img loading="lazy" src="${esc(p.src)}" alt="${esc(p.caption || "Apartment photo")}"${p.fit === "contain" ? ` style="object-fit:contain;background:#fff"` : ""}></button>`).join("")}</div>
+        <div class="gallery">${gallery.map((p, i) => `<button data-i="${i}" aria-label="Open photo: ${esc(p.caption || "")}"><img loading="lazy" src="${esc(p.src)}" alt="${esc(p.caption || "Apartment photo")}"${p.fit === "contain" ? ` style="object-fit:contain;background:#fff"` : ""}></button>`).join("")}</div>
       </section>` : ""}
 
       <section class="block grid2">
@@ -168,7 +169,7 @@
 
     const lb = $("#lightbox");
     $$(".gallery button").forEach((b) => b.onclick = () => {
-      const p = L.photos[b.dataset.i];
+      const p = gallery[b.dataset.i];
       $("img", lb).src = p.src;
       $("p", lb).textContent = p.caption || "";
       lb.classList.add("open");

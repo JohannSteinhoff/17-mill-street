@@ -160,7 +160,8 @@ Source of truth: ${siteUrl(L)}listing.json · Website: ${siteUrl(L)}
       s("Neighborhood", bullets(L.neighborhood, "-")) +
       s("How the relet works", (L.how_it_works || []).map((x, i) => `${i + 1}. ${clean(x)}`).join("\n")) +
       s("FAQ", (L.faq || []).map((f) => `Q: ${clean(f.q)}\nA: ${clean(f.a)}`).join("\n\n")) +
-      s("Photos", (L.photos || []).map((p) => `- ${siteUrl(L)}${p.src}${p.caption ? ` (${p.caption})` : ""}`).join("\n")) +
+      s("Floor plan", floorPlan(L) ? `- ${siteUrl(L)}${floorPlan(L).src}` : "") +
+      s("Photos", (L.photos || []).filter((p) => p !== floorPlan(L)).map((p) => `- ${siteUrl(L)}${p.src}${p.caption ? ` (${p.caption})` : ""}`).join("\n")) +
 `## Contact
 - ${clean(L.contact.name)}: ${clean(L.contact.phone)}, ${clean(L.contact.email)}
 - ${clean(L.contact.preferred)}. ${clean(L.contact.hours)}

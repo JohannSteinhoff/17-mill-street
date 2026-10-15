@@ -58,7 +58,7 @@
   ],
 
   "policies": [
-    { "label": "Pets", "value": "[Cats OK, dogs under 40 lb, $300 deposit]" },
+    { "label": "Pets", "value": "Up to 2 pets allowed" },
     { "label": "Parking", "value": "Free on-site parking" },
     { "label": "Smoking", "value": "[Non-smoking building]" }
   ],
