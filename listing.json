@@ -20,7 +20,7 @@
     "neighborhood": "Copper Beech, near Texas State"
   },
 
-  "rent": "$[1,450]/mo",
+  "rent": "$1,000/mo",
   "available": "[January 1, 2027]",
   "lease_ends": "[July 31, 2027]",
   "bedrooms": "1",
@@ -36,8 +36,8 @@
   ],
 
   "costs": [
-    { "label": "Monthly rent", "value": "$[1,450]" },
-    { "label": "Security deposit", "value": "$[1,450] (paid to landlord)" },
+    { "label": "Monthly rent", "value": "$1,000" },
+    { "label": "Security deposit", "value": "$[1,000] (paid to landlord)" },
     { "label": "Application / relet fee", "value": "$[50] application, $[0] relet fee" },
     { "label": "Utilities (estimate)", "value": "~$[90]/mo electric + internet" }
   ],
