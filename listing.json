@@ -22,8 +22,8 @@
   },
 
   "rent": "$1,000/mo",
-  "available": "[January 1, 2027]",
-  "lease_ends": "[July 31, 2027]",
+  "available": "December 1, 2026",
+  "lease_ends": "July 23, 2027",
   "bedrooms": "1",
   "bathrooms": "1",
   "sqft": "[650]",
