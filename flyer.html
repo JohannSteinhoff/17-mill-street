@@ -113,7 +113,7 @@
     ].filter(([, v]) => v);
 
     $("#page").innerHTML = `
-      <div class="top"><span>For rent · ${esc(clean(a.city))}, ${esc(clean(a.state))}</span><span>${esc(clean(a.street))}, ${esc(clean(a.unit))}</span></div>
+      <div class="top"><span>For rent · ${esc(clean(a.city))}, ${esc(clean(a.state))}</span><span>${esc(clean(a.street))}</span></div>
 
       <h1>${esc(h1a).replace(/(\d+-\w+)/, '<span style="white-space:nowrap">$1</span>')}${h1b.length ? `<span class="light">${esc(h1b.join(" "))}</span>` : ""}</h1>
 

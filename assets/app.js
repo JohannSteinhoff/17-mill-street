@@ -20,7 +20,7 @@ function siteUrl(L) {
 
 function fullAddress(L) {
   const a = L.address;
-  return clean(`${a.street}, ${a.unit}, ${a.city}, ${a.state} ${a.zip}`);
+  return clean([a.street, a.unit, a.city, `${a.state} ${a.zip}`].filter((x) => x && x.trim()).join(", "));
 }
 
 function bedBath(L) {

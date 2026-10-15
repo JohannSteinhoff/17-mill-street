@@ -3,7 +3,7 @@
 
   "site_url": "https://johannsteinhoff.github.io/17-mill-street/",
 
-  "title": "1701 Mill Street, Apt 34107",
+  "title": "1701 Mill Street, San Marcos",
   "headline": "Your own 1-bedroom. No roommates.",
   "tagline": "Skip the 4-person roommate setup. This fully furnished 1 bed / 1 bath at Copper Beech is all yours, with a resort-style pool, 24-hour gym and study room.",
   "listing_type": "Lease takeover (relet)",
@@ -15,7 +15,8 @@
 
   "address": {
     "street": "1701 Mill Street",
-    "unit": "Apt 34107",
+    "unit": "",
+    "_unit_help": "Left blank on purpose so the exact apartment isn't public. Share it when someone books a tour.",
     "city": "San Marcos",
     "state": "TX",
     "zip": "78666",
