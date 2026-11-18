@@ -97,7 +97,7 @@
     const a = L.address;
     const cost = (re) => ((L.costs || []).find((c) => re.test(c.label)) || {}).value;
     const policy = (re) => ((L.policies || []).find((c) => re.test(c.label)) || {}).value;
-    const short = (d) => clean(d).replace(/^(\w{3})\w*/, "$1"); // "December 1, 2026" -> "Dec 1, 2026"
+    const short = (d) => clean(d).replace(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/g, (m) => m.slice(0, 3));
 
     // "Your own 1-bedroom. No roommates." -> bold first sentence, light second
     const [h1a, ...h1b] = clean(L.headline).split(/(?<=\.)\s+/);

@@ -69,7 +69,7 @@ const texts = {
 📍 ${L.address.street}, ${L.address.city} (${L.address.neighborhood})
 🛏 ${L.bedrooms} bed · 🛁 ${L.bathrooms} bath · ${L.sqft} sq ft
 🚌 ${L.commute}
-📅 Available ${L.available} · lease runs through ${L.lease_ends}
+📅 Move in anytime ${L.available} · lease runs through ${L.lease_ends}
 
 ${L.star_feature && !(v && /closet/i.test(v.hook)) ? `🧺 ${L.star_feature}
 
@@ -92,7 +92,7 @@ This is a ${L.listing_type.toLowerCase()}. You'd be approved by the landlord and
   },
 
   short(L) {
-    return clean(`🏡 ${L.bedrooms}BR/${L.bathrooms}BA at ${L.address.street}, ${L.address.city}: ${L.rent}${discount(L)}. Available ${L.available} (lease through ${L.lease_ends}). ${L.commute}.${L.star_feature ? " " + L.star_feature : ""} Photos & details: ${siteUrl(L)}`);
+    return clean(`🏡 ${L.bedrooms}BR/${L.bathrooms}BA at ${L.address.street}, ${L.address.city}: ${L.rent}${discount(L)}. Move in anytime ${L.available} (lease through ${L.lease_ends}). ${L.commute}.${L.star_feature ? " " + L.star_feature : ""} Photos & details: ${siteUrl(L)}`);
   },
 
   craigslist(L) {
@@ -108,7 +108,7 @@ THE BASICS
 - Rent: ${L.rent}${discount(L)}
 - Size: ${L.bedrooms} bed / ${L.bathrooms} bath / ${L.sqft} sq ft, ${L.furnished} (no roommates)
 - Commute: ${L.commute}
-- Available: ${L.available}
+- Move in: anytime ${L.available}
 - Lease ends: ${L.lease_ends} (${L.listing_type})
 
 HIGHLIGHTS
@@ -134,7 +134,7 @@ Text or call: ${L.contact.phone} / ${L.contact.email} (${L.contact.preferred})`)
     return clean(
 `Hi! Thanks for reaching out about ${L.address.street}. Yes, it's still available.
 
-Quick rundown: it's your own ${L.bedrooms} bed / ${L.bathrooms} bath (no roommates), ${L.furnished.toLowerCase()}, ${L.rent} for the whole place${discount(L)}, ${L.commute.charAt(0).toLowerCase() + L.commute.slice(1)}, available ${L.available}, and the lease runs through ${L.lease_ends}. You'd apply with the property manager and take over the lease.
+Quick rundown: it's your own ${L.bedrooms} bed / ${L.bathrooms} bath (no roommates), ${L.furnished.toLowerCase()}, ${L.rent} for the whole place${discount(L)}, ${L.commute.charAt(0).toLowerCase() + L.commute.slice(1)}, you can move in anytime ${L.available}, and the lease runs through ${L.lease_ends}. You'd apply with the property manager and take over the lease.
 
 Everything (photos, costs, FAQ) is here: ${siteUrl(L)}
 
@@ -153,7 +153,7 @@ Source of truth: ${siteUrl(L)}listing.json · Website: ${siteUrl(L)}
 - Type: ${clean(L.listing_type)}
 - Address: ${fullAddress(L)} (${clean(L.address.neighborhood)})
 - Rent: ${clean(L.rent)}${discount(L)}
-- Available: ${clean(L.available)}
+- Move-in window: ${clean(L.available)} (flexible)
 - Lease ends: ${clean(L.lease_ends)}
 - Size: ${bedBath(L)}, ${clean(L.furnished)}, no roommates
 - Commute: ${clean(L.commute)}

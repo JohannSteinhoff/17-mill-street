@@ -199,7 +199,7 @@
     const was = L.rent_original ? `<div class="was">${esc(wasPrice(L))}</div>` : "";
     const save = L.rent_original ? `<div class="save">Discounted · save ${esc(savings(L))}/mo</div>` : "";
     const foot = (id) => `<div class="foot"><div class="q" id="${id}"></div><div><small>Scan for photos + floor plan — or text us</small><b>${esc(clean(L.contact.phone))}</b></div></div>`;
-    const short = (d) => clean(d).replace(/^(\w{3})\w*/, "$1");
+    const short = (d) => clean(d).replace(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/g, (m) => m.slice(0, 3));
     const fact = (label) => ((L.quick_facts || []).find((f) => f.label === label) || {}).value;
     const noFees = /^none$/i.test(clean(fact("Deposit"))) && /^none$/i.test(clean(fact("Fees")));
 

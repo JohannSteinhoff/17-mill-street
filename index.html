@@ -46,7 +46,7 @@
     const plan = floorPlan(L);
     const gallery = (L.photos || []).filter((p) => p !== plan); // floor plan has its own section
     const cover = gallery[0];
-    const short = (d) => clean(d).replace(/^(\w{3})\w*/, "$1"); // "December 1, 2026" -> "Dec 1, 2026"
+    const short = (d) => clean(d).replace(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/g, (m) => m.slice(0, 3));
     const pairs = (arr) => (arr || []).map((x) => [x.label, x.value]);
     const [h1a, ...h1b] = clean(L.headline).split(/(?<=\.)\s+/);
     // Pin on Copper Beech, view centered between it and Texas State University so both show.
