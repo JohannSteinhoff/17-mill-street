@@ -221,13 +221,29 @@ async function exportPng(node, filename, scale = 1) {
   clone.style.transform = "none";
   stage.appendChild(clone);
   document.body.appendChild(stage);
-  await Promise.all($$("img", clone).map((img) => (img.complete ? 0 : new Promise((r) => (img.onload = img.onerror = r)))));
+  // cloneNode() doesn't copy what's drawn on a <canvas> (the QR code), so copy the pixels over.
+  const srcCanvases = $$("canvas", node);
+  $$("canvas", clone).forEach((c, i) => c.getContext("2d").drawImage(srcCanvases[i], 0, 0));
+  // Embed every photo as a data URL and wait until it's decoded; otherwise Safari (iPhone) renders them blank.
+  await Promise.all($$("img", clone).filter((img) => img.getAttribute("src")).map(async (img) => {
+    if (!img.src.startsWith("data:")) {
+      const blob = await (await fetch(img.src)).blob();
+      img.src = await new Promise((r) => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(blob); });
+    }
+    try { await Promise.race([img.decode(), new Promise((r) => setTimeout(r, 3000))]); } catch {}
+  }));
   if (document.fonts) await document.fonts.ready;
   try {
     // html-to-image renders through the browser itself, so condensed (font-stretch) type comes out right.
-    const dataUrl = window.htmlToImage
-      ? await htmlToImage.toPng(clone, { pixelRatio: scale, backgroundColor: "#ffffff" })
-      : (await html2canvas(clone, { scale, useCORS: true, backgroundColor: null })).toDataURL("image/png");
+    // The first pass warms up Safari's image cache; the second one is the one that actually contains the photos.
+    const opts = { pixelRatio: scale, backgroundColor: "#ffffff" };
+    let dataUrl;
+    if (window.htmlToImage) {
+      await htmlToImage.toPng(clone, opts);
+      dataUrl = await htmlToImage.toPng(clone, opts);
+    } else {
+      dataUrl = (await html2canvas(clone, { scale, useCORS: true, backgroundColor: null })).toDataURL("image/png");
+    }
     downloadDataUrl(dataUrl, filename);
   } finally {
     stage.remove();
