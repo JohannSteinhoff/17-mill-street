@@ -64,7 +64,9 @@
     .social .foot .q img, .social .foot .q canvas { width: 150px; height: 150px; display: block; }
     .social .foot small { display: block; font-size: 22px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
     .social .foot b { display: block; font-weight: 900; font-stretch: 75%; font-size: 76px; line-height: 1; margin-top: 4px; }
-    .social.story .ph { flex: none; height: 400px; }
+    /* Photo takes whatever height is left, so the QR footer always fits even if fonts render a bit larger (iPhone). */
+    .social.story > * { flex-shrink: 0; }
+    .social.story .ph { flex: 1 1 0; min-height: 0; height: auto; }
     .social.story .pr1 { display: flex; align-items: flex-end; gap: 28px; }
     .social.story .pr2 { display: flex; align-items: center; gap: 20px; margin-top: 14px; }
     .social.story .now { font-size: 230px; margin: 0; }
@@ -76,7 +78,7 @@
     .social .sfacts div:last-child { border-bottom: 2px solid #111; }
     .social .sfacts dt { font-size: 24px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding-top: 8px; }
     .social .sfacts dd { margin: 0; font-weight: 700; }
-    .social.story .foot { margin-top: auto; }
+    .social.story .foot { margin-top: auto; flex: none; }
     .social.story .foot .q img, .social.story .foot .q canvas { width: 190px; height: 190px; }
     .social.story .foot b { font-size: 104px; }
   </style>
