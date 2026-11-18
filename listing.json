@@ -50,7 +50,7 @@
     { "label": "Wi-Fi", "value": "Included" },
     { "label": "Utilities", "value": "Water, electric, sewer + trash (you pay)" },
     { "label": "Pets", "value": "Up to 2" },
-    { "label": "Parking", "value": "Free on-site" },
+    { "label": "Parking", "value": "Free lot right outside the door" },
     { "label": "Amenities", "value": "Pool, 24-hr gym, study room" }
   ],
   "_quick_facts_help": "Short one-liners for the website's Details grid. Keep each value brief.",
@@ -76,7 +76,7 @@
 
   "policies": [
     { "label": "Pets", "value": "Up to 2 pets allowed" },
-    { "label": "Parking", "value": "Free on-site parking" }
+    { "label": "Parking", "value": "Free parking lot right outside the front door" }
   ],
 
   "how_it_works": [
