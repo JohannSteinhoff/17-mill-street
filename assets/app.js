@@ -58,9 +58,12 @@ const bullets = (arr, mark = "•") => (arr || []).map((x) => `${mark} ${clean(x
 const pairs = (arr, mark = "•") => (arr || []).map((x) => `${mark} ${clean(x.label)}: ${clean(x.value)}`).join("\n");
 
 const texts = {
-  marketplace(L) {
+  // v = one of L.listing_versions (optional): swaps the headline, opening line and highlight order.
+  marketplace(L, v, i = 0) {
+    const intro = v ? v.hook : L.tagline;
+    const hl = (L.highlights || []).slice(i % Math.max(1, (L.highlights || []).length)).concat((L.highlights || []).slice(0, i % Math.max(1, (L.highlights || []).length)));
     return clean(
-`${L.headline}
+`${v ? v.headline : L.headline}
 💵 ${L.rent}${discount(L)}
 
 📍 ${L.address.street}, ${L.address.city} (${L.address.neighborhood})
@@ -68,12 +71,12 @@ const texts = {
 🚌 ${L.commute}
 📅 Available ${L.available} · lease runs through ${L.lease_ends}
 
-${L.star_feature ? `🧺 ${L.star_feature}
+${L.star_feature && !(v && /closet/i.test(v.hook)) ? `🧺 ${L.star_feature}
 
-` : ""}${L.tagline}
+` : ""}${intro}
 
 ✨ Highlights
-${bullets(L.highlights)}
+${bullets(hl)}
 
 💵 Costs
 ${pairs(L.costs)}

@@ -100,11 +100,105 @@
   ],
 
   "photos": [
-    { "src": "photos/01-bedroom.webp", "caption": "Bedroom" },
-    { "src": "photos/02-pool-patio.webp", "caption": "Pool and patio" },
-    { "src": "photos/03-fitness-center.webp", "caption": "24-hour fitness center" },
+    { "src": "photos/01-living-and-kitchen.jpg", "caption": "Living room and kitchen" },
+    { "src": "photos/02-living-room.jpg", "caption": "Living room" },
+    { "src": "photos/03-kitchen.jpg", "caption": "Kitchen" },
+    { "src": "photos/04-breakfast-bar.jpg", "caption": "Breakfast bar" },
+    { "src": "photos/05-bedroom.jpg", "caption": "Bedroom" },
+    { "src": "photos/06-bedroom-desk.jpg", "caption": "Bedroom desk" },
+    { "src": "photos/07-bedroom-dresser.jpg", "caption": "Bedroom dresser" },
+    { "src": "photos/08-walk-in-closet.jpg", "caption": "Walk-in closet" },
+    { "src": "photos/09-washer-dryer-in-closet.jpg", "caption": "Washer + dryer in the closet" },
+    { "src": "photos/10-bathroom.jpg", "caption": "Bathroom" },
+    { "src": "photos/11-tub-and-shower.jpg", "caption": "Tub and shower" },
+    { "src": "photos/12-dining-and-entry.jpg", "caption": "Dining bar and entry" },
+    { "src": "photos/13-living-room-2.jpg", "caption": "Living room" },
+    { "src": "photos/14-hallway-to-bedroom.jpg", "caption": "Hallway to the bedroom" },
+    { "src": "photos/15-entry-closet.jpg", "caption": "Entry closet" },
+    { "src": "photos/16-kitchen-cabinets.jpg", "caption": "Kitchen cabinets" },
+    { "src": "photos/17-fridge.jpg", "caption": "Fridge" },
+    { "src": "photos/18-water-heater-closet.jpg", "caption": "Utility closet" },
+    { "src": "photos/02-pool-patio.webp", "caption": "Community pool and patio" },
+    { "src": "photos/03-fitness-center.webp", "caption": "Community 24-hour fitness center" },
     { "src": "photos/04-floorplan.webp", "caption": "Floor plan: 1 bed / 1 bath", "fit": "contain", "floorplan": true }
   ],
+  "listing_versions": [
+    {
+      "name": "No roommates",
+      "title": "Furnished 1BR/1BA – $900/mo – No Roommates – Near Texas State",
+      "headline": "Your own 1-bedroom. No roommates.",
+      "hook": "Skip the 4-person roommate setup. This whole fully furnished 1 bed / 1 bath is yours.",
+      "photos": [
+        "photos/01-living-and-kitchen.jpg",
+        "photos/02-living-room.jpg",
+        "photos/03-kitchen.jpg",
+        "photos/05-bedroom.jpg",
+        "photos/08-walk-in-closet.jpg",
+        "photos/09-washer-dryer-in-closet.jpg",
+        "photos/10-bathroom.jpg",
+        "photos/04-breakfast-bar.jpg",
+        "photos/12-dining-and-entry.jpg",
+        "photos/02-pool-patio.webp",
+        "photos/04-floorplan.webp"
+      ]
+    },
+    {
+      "name": "Price drop",
+      "title": "Price Drop: $900/mo Furnished 1 Bedroom (was $1,119) – San Marcos",
+      "headline": "Was $1,119. Now $900.",
+      "hook": "Rent is discounted from $1,119 to $900/mo for the entire apartment. No deposit, no application fees, no credit check.",
+      "photos": [
+        "photos/05-bedroom.jpg",
+        "photos/02-living-room.jpg",
+        "photos/03-kitchen.jpg",
+        "photos/06-bedroom-desk.jpg",
+        "photos/07-bedroom-dresser.jpg",
+        "photos/08-walk-in-closet.jpg",
+        "photos/11-tub-and-shower.jpg",
+        "photos/14-hallway-to-bedroom.jpg",
+        "photos/01-living-and-kitchen.jpg",
+        "photos/04-floorplan.webp"
+      ]
+    },
+    {
+      "name": "Close to campus",
+      "title": "1 Bedroom on Route 22 Bus Loop – 10 Min to Texas State – $900/mo",
+      "headline": "10 minutes to Texas State.",
+      "hook": "On the Route 22 bus loop, about 10 minutes to Texas State University. The complex has a pool, a 24-hour gym and a study room.",
+      "photos": [
+        "photos/02-living-room.jpg",
+        "photos/02-pool-patio.webp",
+        "photos/03-fitness-center.webp",
+        "photos/01-living-and-kitchen.jpg",
+        "photos/05-bedroom.jpg",
+        "photos/03-kitchen.jpg",
+        "photos/10-bathroom.jpg",
+        "photos/13-living-room-2.jpg",
+        "photos/09-washer-dryer-in-closet.jpg",
+        "photos/04-floorplan.webp"
+      ]
+    },
+    {
+      "name": "Closet laundry",
+      "title": "Furnished 1BR – Washer & Dryer Right in the Closet – $900/mo",
+      "headline": "Laundry without leaving your closet.",
+      "hook": "The washer and dryer are built right into the bedroom closet. You don't even have to leave your closet to do laundry!",
+      "photos": [
+        "photos/09-washer-dryer-in-closet.jpg",
+        "photos/08-walk-in-closet.jpg",
+        "photos/05-bedroom.jpg",
+        "photos/01-living-and-kitchen.jpg",
+        "photos/03-kitchen.jpg",
+        "photos/04-breakfast-bar.jpg",
+        "photos/10-bathroom.jpg",
+        "photos/15-entry-closet.jpg",
+        "photos/16-kitchen-cabinets.jpg",
+        "photos/04-floorplan.webp"
+      ]
+    }
+  ],
+  "_listing_versions_help": "Different takes for posting more than once. Each has its own Marketplace title, headline, opening line and photo set (first photo = cover image).",
+
   "_photos_help": "Put images in the photos/ folder and list them like: { \"src\": \"photos/01-living-room.jpg\", \"caption\": \"Living room\" }. The first photo is the cover image. Mark the floor plan with \"floorplan\": true (and \"fit\": \"contain\" so it isn't cropped); it gets its own big spot on the flyer and website.",
 
   "contact": {
