@@ -221,11 +221,20 @@ async function exportPng(node, filename, scale = 1) {
   clone.style.transform = "none";
   stage.appendChild(clone);
   document.body.appendChild(stage);
-  // cloneNode() doesn't copy what's drawn on a <canvas> (the QR code), so copy the pixels over.
+  // cloneNode() doesn't copy what's drawn on a <canvas> (the QR code). On Android the QR library shows the
+  // canvas instead of an <img>, so swap each canvas for an <img> of its pixels at the same size.
   const srcCanvases = $$("canvas", node);
-  $$("canvas", clone).forEach((c, i) => c.getContext("2d").drawImage(srcCanvases[i], 0, 0));
+  $$("canvas", clone).forEach((c, i) => {
+    const cs = getComputedStyle(srcCanvases[i]);
+    const im = document.createElement("img");
+    im.src = srcCanvases[i].toDataURL("image/png");
+    im.style.cssText = `display:${cs.display};width:${cs.width};height:${cs.height}`;
+    c.replaceWith(im);
+  });
+  // Images with no src (the QR library's unused placeholder) make the export fail outright.
+  $$("img", clone).filter((img) => !img.getAttribute("src")).forEach((img) => img.remove());
   // Embed every photo as a data URL and wait until it's decoded; otherwise Safari (iPhone) renders them blank.
-  await Promise.all($$("img", clone).filter((img) => img.getAttribute("src")).map(async (img) => {
+  await Promise.all($$("img", clone).map(async (img) => {
     if (!img.src.startsWith("data:")) {
       const blob = await (await fetch(img.src)).blob();
       img.src = await new Promise((r) => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(blob); });
